@@ -1,2 +1,0 @@
-# Software-engineer
-Coursework repository
