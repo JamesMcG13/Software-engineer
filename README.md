@@ -2,7 +2,7 @@
 Coursework repository
 
 navigate to CMD
-CD -> where your files are kep: 
+CD -> where your files are kept: 
 
-do mpm update
+do npm update (imports the node_modules folder)
 node server.js
