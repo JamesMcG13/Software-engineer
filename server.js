@@ -20,7 +20,15 @@ initializePassport(
 )
 
 // user array
-const users = []
+const users = [{
+  id: '1651073914779',
+  email: '1',
+  fname: '',
+  lname: '',
+  dob: '',
+  password: '$2b$10$yvfs1CMFPJ.Izs4u/KMgd.2H.2I8bYTsxasm2R7oj03fmL7NB6YNi',
+  events: []
+}]
 const currentUser=null
 
 app.use(express.static(__dirname + '/Views'));
@@ -66,7 +74,8 @@ app.post('/register',checkNotAuthenticated, async (req, res) => {
       fname: req.body.fname,
       lname: req.body.lname,
       dob: req.body.dob,
-      password: hashedPassword
+      password: hashedPassword,
+      events: []
     })
     
     res.redirect('/login')
@@ -185,4 +194,30 @@ app.get('/calendar', (req, res) => {
  });
 
  //FELIX CALENDAR
- 
+
+
+//saving an event
+ app.post('/saveEvent',checkAuthenticated, async (req, res) => {
+  const user = req.user
+  
+  try {
+    user.events.push({
+      eventDate : true,
+      Title: req.body.eventTitle,
+      Start: req.body.eventStart,
+      End: req.body.eventEnd
+    })
+     
+    res.redirect('/calendar')
+  } catch {
+    console.log('Exception')
+    res.redirect('/')
+  }
+  console.log(user.events)
+})
+
+//sending events array
+app.get('/api/events',(req,res) => {
+  const user = req.user
+  res.json(user.events)
+})
