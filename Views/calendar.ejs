@@ -83,12 +83,16 @@
             </div>
 
             <div id ="newEventModal">
-                <h2>New Event</h2>
-                <input id="eventTitleInput" placeholder="Event Title">
-                <input type = "time" id="eventStartInput" placeholder="Start time">
-                <input type = "time" id="eventEndInput" placeholder="End time">
-                <button id="saveButton">Save</button>
-                <button id="cancelButton">Cancel</button>
+                <form action="/saveEvent" method="POST">
+                    <h2>New Event</h2>
+                    
+                    <input class="eventForm" type="text" id="eventTitle" name="eventTitle">
+                    <input class="eventForm" type="time" id="eventStart" name="eventStart">
+                    <input class="eventForm" type="time" id="eventEnd" name="eventEnd">
+                    <button class="saveButton" type="submit">Save</button>
+    
+                    <button id="cancelButton">Cancel</button>
+                </form>    
             </div>  
             <div id="modalBackDrop"></div>
             <div id="deleteEventModal">
