@@ -2,6 +2,8 @@ if(process.env.NODE_ENV!== 'production'){
   require('dotenv').config()
 }
 
+
+
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -12,7 +14,8 @@ const session = require('express-session')
 const methodOverride = require('method-override')
 
 
-const initializePassport = require('./passport')
+const initializePassport = require('./passport');
+const { json } = require('express/lib/response');
 initializePassport(
   passport,
   email => users.find(user => user.email === email),
@@ -29,6 +32,7 @@ const users = [{
   password: '$2b$10$yvfs1CMFPJ.Izs4u/KMgd.2H.2I8bYTsxasm2R7oj03fmL7NB6YNi',
   events: []
 }]
+modules = []
 const currentUser=null
 
 app.use(express.static(__dirname + '/Views'));
@@ -88,9 +92,48 @@ app.post('/register',checkNotAuthenticated, async (req, res) => {
 app.get('/',checkAuthenticated, (req,res) => {
       res.render('index.ejs',{name: req.user.fname})
 });
+app.get('/module_creator',checkAuthenticated, (req,res) => {
+  res.render('module_creator.ejs')
+});
+app.post('/module_creator',checkAuthenticated, async (req, res) => {
+  try {
+    
+    console.log(req.body.moduleName +" "+  req.body.start+" "+  req.body.end)
+   
+    
+    console.log("1")
+    var obj = {
+      table: []
+    };
+
+   obj.table.push({
+    name : req.body.moduleName,  
+    start : req.body.start,
+    end : req.body.end
+   })
+   
+
+    console.log("2")
+    var fs = require('fs');
+    console.log("3")
+    console.log(JSON.stringify(obj))
+    fs.writeFile('module.json', JSON.stringify(obj), error => console.error)
+   
+    
+    
 
 
+    //res.redirect('/module_creator')
+  } catch {
+    res.redirect('/')
+  }
+  res.redirect('download')
+})
 
+
+app.get('/download', (req, res) => {
+  res.download('module.json')
+})
 
 
 //get user array, needs to be in login page
@@ -196,7 +239,7 @@ app.get('/calendar', (req, res) => {
  //FELIX CALENDAR
 
 
-//saving an event
+
  app.post('/saveEvent',checkAuthenticated, async (req, res) => {
   const user = req.user
   
@@ -207,17 +250,11 @@ app.get('/calendar', (req, res) => {
       Start: req.body.eventStart,
       End: req.body.eventEnd
     })
-     
+    
     res.redirect('/calendar')
   } catch {
     console.log('Exception')
     res.redirect('/')
   }
   console.log(user.events)
-})
-
-//sending events array
-app.get('/api/events',(req,res) => {
-  const user = req.user
-  res.json(user.events)
 })
