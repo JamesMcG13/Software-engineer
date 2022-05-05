@@ -2,6 +2,8 @@ if(process.env.NODE_ENV!== 'production'){
   require('dotenv').config()
 }
 
+const fs = require("fs");
+
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -12,7 +14,8 @@ const session = require('express-session')
 const methodOverride = require('method-override')
 
 
-const initializePassport = require('./passport')
+const initializePassport = require('./passport');
+const { json } = require('express/lib/response');
 initializePassport(
   passport,
   email => users.find(user => user.email === email),
@@ -27,8 +30,10 @@ const users = [{
   lname: '',
   dob: '',
   password: '$2b$10$yvfs1CMFPJ.Izs4u/KMgd.2H.2I8bYTsxasm2R7oj03fmL7NB6YNi',
-  events: []
+  events: [],
+  modules: []
 }]
+modules = []
 const currentUser=null
 
 app.use(express.static(__dirname + '/Views'));
@@ -75,7 +80,8 @@ app.post('/register',checkNotAuthenticated, async (req, res) => {
       lname: req.body.lname,
       dob: req.body.dob,
       password: hashedPassword,
-      events: []
+      events: [],
+      modules: []
     })
     
     res.redirect('/login')
@@ -88,9 +94,69 @@ app.post('/register',checkNotAuthenticated, async (req, res) => {
 app.get('/',checkAuthenticated, (req,res) => {
       res.render('index.ejs',{name: req.user.fname})
 });
+app.get('/module_creator',checkAuthenticated, (req,res) => {
+  res.render('module_creator.ejs')
+});
+app.post('/module_creator',checkAuthenticated, async (req, res) => {
+  try {
+    
+   
+   
+    
+    console.log("1")
+    var obj = {
+      table: []
+    };
+
+   obj.table.push({
+    name : req.body.moduleName,
+    code : req.body.moduleCode,  
+    start : req.body.moduleStart,
+    end : req.body.moduleEnd,
+    coursework : [
+      {
+        name : req.body.courseworkName1,
+        type : req.body.courseworkType1,
+        start: req.body.courseworkStart1,
+        end : req.body.courseworkEnd1
+      }, 
+      {
+        name : req.body.courseworkName2,
+        type : req.body.courseworkType2,
+        start: req.body.courseworkStart2,
+        end : req.body.courseworkEnd2 
+      },
+      {
+        name : req.body.courseworkName3,
+        type : req.body.courseworkType3,
+        start: req.body.courseworkStart3,
+        end : req.body.courseworkEnd3 
+      }
+    ]
+   })
+   
+
+    console.log("2")
+    var fs = require('fs');
+    console.log("3")
+    console.log(JSON.stringify(obj))
+    fs.writeFile('module.json', JSON.stringify(obj), error => console.error)
+   
+    
+    
 
 
+    //res.redirect('/module_creator')
+  } catch {
+    res.redirect('/')
+  }
+  res.redirect('download')
+})
 
+
+app.get('/download', (req, res) => {
+  res.download('module.json')
+})
 
 
 //get user array, needs to be in login page
@@ -185,18 +251,29 @@ app.get('/calendar', (req, res) => {
   res.render('calendar.ejs');
  });
 
- app.get('/fileupload', (req, res) => {
+ app.get('/fileupload',checkAuthenticated, (req, res) => {
   res.render('fileupload.ejs');
  });
 
- app.get('/uploadedPage', (req, res) => {
-  res.render('uploadedpage.ejs');
+ app.post('/uploadModule', checkAuthenticated, (req, res) => {
+  fileData = req.body.uploadedFile
+  
+  const jsonString = fs.readFileSync(fileData);
+  const parsedFile = JSON.parse(jsonString);
+  const module = parsedFile.table[0]
+  
+  console.log(module)
+
+  const user = req.user
+  user.modules.push(module)
+  
+  res.render('uploadedpage.ejs',{module: module});
  });
 
  //FELIX CALENDAR
 
 
-//saving an event
+
  app.post('/saveEvent',checkAuthenticated, async (req, res) => {
   const user = req.user
   
@@ -207,7 +284,7 @@ app.get('/calendar', (req, res) => {
       Start: req.body.eventStart,
       End: req.body.eventEnd
     })
-     
+    
     res.redirect('/calendar')
   } catch {
     console.log('Exception')
@@ -216,8 +293,5 @@ app.get('/calendar', (req, res) => {
   console.log(user.events)
 })
 
-//sending events array
-app.get('/api/events',(req,res) => {
-  const user = req.user
-  res.json(user.events)
-})
+
+
