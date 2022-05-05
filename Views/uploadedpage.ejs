@@ -61,7 +61,32 @@
 		</header>
        
         <div class="content-container">
-            <p>Current Semester: </p>
+            <div class="upload-container">
+            <p>
+                <label for="coursework">Module:</label><br>
+                <select id="module-select" name="module-select">
+                    <option selected disabled>Select...</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select><br>  
+
+                <u>Module 1</u><br><br>
+                name: <%= module.name %><br>
+                start: <%= module.start %><br>
+                end: <%= module.end %><br>
+                code: <%= module.code %><br>
+                coursework: <%= module.coursework %><br>
+                exams: <%= module.exams %><br>
+                weightings: <%= module.weightings %><br>
+                deadlines: <%= module.deadlines %><br>
+
+                <br><u>Module 2</u><br><br>
+
+                <br><u>Module 3</u><br><br>
+            </p>
+            </div>
+
 
 </form>
 
