@@ -11,15 +11,13 @@ const eventEndInput = document.getElementById('eventEndInput');
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 //when click on a date
-function openModal(date) {
-    clicked = date;
+function openModal() {
     newEventModal.style.display = 'block';
     backDrop.style.display = 'block';
 }
 
 function load() {
     const dt = new Date;
-
     if (nav !== 0) {
         dt.setMonth(new Date().getMonth() + nav);
     }
@@ -39,42 +37,46 @@ function load() {
     });
 
     const paddingDays = weekdays.indexOf(dateString.split(', ')[0]);
-
+    console.log(paddingDays)
     document.getElementById('monthDisplay').innerText = `${dt.toLocaleDateString('en-uk', { month: 'long' })} ${year}`;
 
-    calendar.innerHTML = '';
+    var calendarChildren = calendar.children;
 
-    for (let i = 1; i <= paddingDays + daysInMonth; i++) {
-        const daySquare = document.createElement('div');
-        daySquare.classList.add('day');
-
+    var calendarDay = 1;
+    //go through all calendar day divs
+    for (let i = 1; i <= calendarChildren.length; i++) {
+        var daySquare = document.getElementById(i);
+        daySquare.classList = '';
+        daySquare.innerText = '';
+        daySquare.style = '';
+        
         const dayString = `${month + 1}/${i - paddingDays}/${year}`;
-
-        if (i > paddingDays) {
-            daySquare.innerText = i - paddingDays;
+        //if the day is in that month 
+        if (i > paddingDays && i < daysInMonth+paddingDays+1) {
+            daySquare.classList.add(i - paddingDays + '-' + (month+1) + '-' + year);
+            daySquare.innerText = calendarDay;
+            calendarDay++;
 
             if (i - paddingDays == day && nav == 0) {
-                daySquare.id = 'currentDay';
+                daySquare.classList.add('currentDay');
+                daySquare.style.backgroundColor = '#e8faed';
             }
-            daySquare.addEventListener('click', () => openModal(dayString));
+
         } else {
             daySquare.classList.add('padding');
+            daySquare.innerText = '';
         }
-        calendar.appendChild(daySquare);
     }
 
     //console.log(paddingDays);
 }
 
 function closeModal() {
-    eventTitleInput.classList.remove('error');
     newEventModal.style.display = 'none';
-    deleteEventModal.style.display = 'none';
     backDrop.style.display = 'none';
     eventTitleInput.value = '';
     eventStartInput.value = '';
     eventEndInput.value = '';
-    clicked = null;
     load();
 }
 
@@ -88,6 +90,7 @@ function initButtons() {
         nav--;
         load();
     });
+    newEvent.addEventListener('click', () => openModal());
     document.getElementById('cancelButton').addEventListener('click', closeModal);
 }
 initButtons();

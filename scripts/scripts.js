@@ -13,12 +13,3 @@ function topFunction() {
   document.body.scrollTop = 0; // safari
   document.documentElement.scrollTop = 0; // chrome, firefox, ie and opera
 }
-
-function colourFunction() {
-  var element = document.body;
-  element.classList.toggle("darkMode");
-  var footer = document.querySelector('footer')
-  footer.classList.toggle("darkFooter")
-  
-
-}

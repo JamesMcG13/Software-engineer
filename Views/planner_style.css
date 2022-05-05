@@ -290,7 +290,7 @@ button {
   display: flex;
   flex-wrap: wrap;
 }
-.day {
+#calendar * {
   width: 12%;
   padding: 10px;
   height: 100px;
@@ -303,13 +303,10 @@ button {
   flex-direction: column;
   justify-content: space-between;
 }
-.day:hover {
+#calendar *:hover {
   background-color: #e8faed;
 }
 
-.day + #currentDay {
-  background-color:#e8f4fa;
-}
 .event {
   font-size: 10px;
   padding: 3px;

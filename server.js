@@ -1,7 +1,6 @@
 if(process.env.NODE_ENV!== 'production'){
   require('dotenv').config()
 }
-
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -12,7 +11,8 @@ const session = require('express-session')
 const methodOverride = require('method-override')
 
 
-const initializePassport = require('./passport')
+const initializePassport = require('./passport');
+const { CLIENT_RENEG_LIMIT } = require('tls');
 initializePassport(
   passport,
   email => users.find(user => user.email === email),
@@ -86,10 +86,8 @@ app.post('/register',checkNotAuthenticated, async (req, res) => {
 })
 
 app.get('/',checkAuthenticated, (req,res) => {
-      res.render('index.ejs',{name: req.user.fname})
+  res.render('index.ejs',{name: req.user.fname})
 });
-
-
 
 
 
@@ -181,8 +179,12 @@ app.use('/facebook.png', express.static('images/facebook.png'));
 app.use('/twitter.png', express.static('images/twitter.png'));
 app.use('/instagram.png', express.static('images/instagram.png'));
 
-app.get('/calendar', (req, res) => {
-  res.render('calendar.ejs');
+app.get('/calendar', checkAuthenticated, (req, res) => {
+  const user = req.user
+
+  res.render('calendar.ejs', {
+    userEvents : user.events
+  });
  });
 
  app.get('/fileupload', (req, res) => {
@@ -202,7 +204,7 @@ app.get('/calendar', (req, res) => {
   
   try {
     user.events.push({
-      eventDate : true,
+      eventDate : req.body.eventDate,
       Title: req.body.eventTitle,
       Start: req.body.eventStart,
       End: req.body.eventEnd
@@ -216,8 +218,5 @@ app.get('/calendar', (req, res) => {
   console.log(user.events)
 })
 
-//sending events array
-app.get('/api/events',(req,res) => {
-  const user = req.user
-  res.json(user.events)
-})
+
+
