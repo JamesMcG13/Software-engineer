@@ -13,6 +13,7 @@ const methodOverride = require('method-override')
 
 const initializePassport = require('./passport');
 const { CLIENT_RENEG_LIMIT } = require('tls');
+const { response } = require('express');
 initializePassport(
   passport,
   email => users.find(user => user.email === email),
@@ -209,7 +210,10 @@ app.get('/calendar', checkAuthenticated, (req, res) => {
       Start: req.body.eventStart,
       End: req.body.eventEnd
     })
-     
+    //writing out updated array to json file
+    let data = JSON.stringify(user.events);
+    fs.writeFileSync('Views/student-events.json', data);
+    //reload calendar
     res.redirect('/calendar')
   } catch {
     console.log('Exception')

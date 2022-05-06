@@ -1,218 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
-    <meta charset="UTF-8">
-    <title>UEA Study Planner</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="planner_style.css">
-    <style>
-    </style>   
+<meta charset="UTF-8">
+<title>UEA Study Planner</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="planner_style.css">
+<style></style>
 
-    <body>
-        <!-- scroll to top button -->
-        <button id="scrollBtn" title="Back to top" onclick="topFunction()">↑<br>Back to Top</button>
-    
-        <header> <!-- header contains both nav bar and logo  -->
-            <div class="top-bar">
-                    <img id="uea" src="https://i.imgur.com/G8W14Io.png">
-                    <h1>Student Study Planner</h1>
-                    <img id="logo" src="https://i.imgur.com/Bfrya3f.png​">
-                </div>
+<body>
+    <!-- scroll to top button -->
+    <button id="scrollBtn" title="Back to top" onclick="topFunction()">↑<br>Back to Top</button>
 
-            </div>
-            
-			
-			<div class="navigation-bar">
-                <div id="navigation-container"> 
-                    <ul>
-                        <li><a href="/">Home</a></li>
-                        <li><a href="calendar">Calendar</a></li>
-                        <li><a href="fileupload">Profile Upload</a></li>
-                        <li><a href="about">About</a></li>
-                        <li><a href="help">Help</a></li>
-                        <li>
-                            <form action="/logout?_method=DELETE" method="POST">
-                                <button class= "logoutBtn" type="submit">Log Out</button>
-                            </form>
-                        </li>
-                        <li>
-                            <button id="colorBtn" class="darkMode" onclick="colourFunction()">Toggle Colour</button>
-                        </li>
-                        <!--Added 3 images FELIX-->
-                        <div id="social">
-                            <div id="fb">
-                                <a href="https://facebook.com/ueaofficial/">
-                                    <img id="socialImage" src="/facebook.png">
-                                </a>
-                            </div>
-                            <div id="ig">
-                                <a href="https://instagram.com/uniofeastanglia">
-                                    <img id="socialImage" src="/instagram.png">
-                                </a>
-                            </div>
-                            <div id="tt">
-                                <a href="https://twitter.com/uniofeastanglia">
-                                    <img id="socialImage" href="twitter" src="/twitter.png">
-                                </a>
-                            </div>
-                        </div>
-                    </ul>
-                </div>
-            </div>
-		
-		</header>
-       
-        
-        <div class="content-container">
-            <div class="containerCalendar">
-                <div id="headerCalendar">
-                    <div id = "monthDisplay"></div>
-                    <div>
-                        <button id="newEvent">Add event</button>
-                        <button id="backButton">Previous</button>
-                        <button id = "nextButton">Next</button>
-                    </div>
-                </div>
-                </div>
-                <div id="weekdays">
-                    <div>Sunday</div>
-                    <div>Monday</div>
-                    <div>Tuesday</div>
-                    <div>Wednesday</div>
-                    <div>Thursday</div>
-                    <div>Friday</div>
-                    <div>Saturday</div>
-                </div>  
-                <div id="calendar">
-                    <div id = '1'></div>
-                    <div id = '2'></div>
-                    <div id = '3'></div>
-                    <div id = '4'></div>
-                    <div id = '5'></div>
-                    <div id = '6'></div>
-                    <div id = '7'></div>
-                    <div id = '8'></div>
-                    <div id = '9'></div>
-                    <div id = '10'></div>
-                    <div id = '11'></div>
-                    <div id = '12'></div>
-                    <div id = '13'></div>
-                    <div id = '14'></div>
-                    <div id = '15'></div>
-                    <div id = '16'></div>
-                    <div id = '17'></div>
-                    <div id = '18'></div>
-                    <div id = '19'></div>
-                    <div id = '20'></div>
-                    <div id = '21'></div>
-                    <div id = '22'></div>
-                    <div id = '23'></div>
-                    <div id = '24'></div>
-                    <div id = '25'></div>
-                    <div id = '26'></div>
-                    <div id = '27'></div>
-                    <div id = '28'></div>
-                    <div id = '29'></div>
-                    <div id = '30'></div>
-                    <div id = '31'></div>
-                    <div id = '32'></div>
-                    <div id = '33'></div>
-                    <div id = '34'></div>
-                    <div id = '35'></div>
-                    <div id = '36'></div>
-                    <div id = '37'></div>
-                </div>
-            </div>
-
-            <div id ="newEventModal">
-                <form action="/saveEvent" method="POST">
-                    <h2>New Event</h2>
-                    
-                    <input class="eventForm" type="text" id="eventTitle" name="eventTitle">
-                    <input class="eventForm" type="date" id="eventDate" name="eventDate">
-                    <input class="eventForm" type="time" id="eventStart" name="eventStart">
-                    <input class="eventForm" type="time" id="eventEnd" name="eventEnd">
-                    <button class="saveButton" type="submit">Save</button>
-                </form>
-                <button id="cancelButton">Cancel</button>    
-            </div>  
-            <div id="modalBackDrop"></div>
-            <div id="deleteEventModal">
-                <h2>Event</h2>
-                <p id="eventText"></p>
-                <button id="deleteButton">Delete</button>
-                <button id="closeButton">Close</button>
-            </div>
-            
+    <header>
+        <!-- header contains both nav bar and logo  -->
+        <div class="top-bar">
+            <img id="uea" src="https://i.imgur.com/G8W14Io.png">
+            <h1>Student Study Planner</h1>
+            <img id="logo" src="https://i.imgur.com/Bfrya3f.png​">
         </div>
-    <script src="./calendar.js"></script>
-    <script src="scripts.js"></script>
+
+        </div>
+
+
+        <div class="navigation-bar">
+            <div id="navigation-container">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="calendar">Calendar</a></li>
+                    <li><a href="fileupload">Profile Upload</a></li>
+                    <li><a href="about">About</a></li>
+                    <li><a href="help">Help</a></li>
+                    <li>
+                        <form action="/logout?_method=DELETE" method="POST">
+                            <button class="logoutBtn" type="submit">Log Out</button>
+                        </form>
+                    </li>
+                    <li>
+                        <button id="colorBtn" class="darkMode" onclick="colourFunction()">Toggle Colour</button>
+                    </li>
+                    <!--Added 3 images FELIX-->
+                    <div id="social">
+                        <div id="fb">
+                            <a href="https://facebook.com/ueaofficial/">
+                                <img id="socialImage" src="/facebook.png">
+                            </a>
+                        </div>
+                        <div id="ig">
+                            <a href="https://instagram.com/uniofeastanglia">
+                                <img id="socialImage" src="/instagram.png">
+                            </a>
+                        </div>
+                        <div id="tt">
+                            <a href="https://twitter.com/uniofeastanglia">
+                                <img id="socialImage" href="twitter" src="/twitter.png">
+                            </a>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+        </div>
+
+    </header>
+
+
+    <div class="content-container">
+        <div class="containerCalendar">
+            <div id="headerCalendar">
+                <div id = "monthDisplay"></div>
+                <div>
+                    <button id="newEvent">Add event</button>
+                    <button id="backButton">Previous</button>
+                    <button id = "nextButton">Next</button>
+                </div>
+            </div>
+            </div>
+            <div id="weekdays">
+                <div>Sunday</div>
+                <div>Monday</div>
+                <div>Tuesday</div>
+                <div>Wednesday</div>
+                <div>Thursday</div>
+                <div>Friday</div>
+                <div>Saturday</div>
+            </div>  
+            <div id="calendar">
+                <div id = '1'></div>
+                <div id = '2'></div>
+                <div id = '3'></div>
+                <div id = '4'></div>
+                <div id = '5'></div>
+                <div id = '6'></div>
+                <div id = '7'></div>
+                <div id = '8'></div>
+                <div id = '9'></div>
+                <div id = '10'></div>
+                <div id = '11'></div>
+                <div id = '12'></div>
+                <div id = '13'></div>
+                <div id = '14'></div>
+                <div id = '15'></div>
+                <div id = '16'></div>
+                <div id = '17'></div>
+                <div id = '18'></div>
+                <div id = '19'></div>
+                <div id = '20'></div>
+                <div id = '21'></div>
+                <div id = '22'></div>
+                <div id = '23'></div>
+                <div id = '24'></div>
+                <div id = '25'></div>
+                <div id = '26'></div>
+                <div id = '27'></div>
+                <div id = '28'></div>
+                <div id = '29'></div>
+                <div id = '30'></div>
+                <div id = '31'></div>
+                <div id = '32'></div>
+                <div id = '33'></div>
+                <div id = '34'></div>
+                <div id = '35'></div>
+                <div id = '36'></div>
+                <div id = '37'></div>
+            </div>
+        </div>
+
+        <div id ="newEventModal">
+            <form action="/saveEvent" method="POST">
+                <h2>New Event</h2>
+                
+                <input class="eventForm" type="text" id="eventTitle" name="eventTitle">
+                <input class="eventForm" type="date" id="eventDate" name="eventDate">
+                <input class="eventForm" type="time" id="eventStart" name="eventStart">
+                <input class="eventForm" type="time" id="eventEnd" name="eventEnd">
+                <button class="saveButton" type="submit">Save</button>
+            </form>
+            <button id="cancelButton">Cancel</button>    
+        </div>  
+        <div id="modalBackDrop"></div>
+        <div id="deleteEventModal">
+            <h2>Event</h2>
+            <p id="eventText"></p>
+            <button id="deleteButton">Delete</button>
+            <button id="closeButton">Close</button>
+        </div>
+        
+    </div>
+<script src="./calendar.js"></script>
+<script src="scripts.js"></script>
 
     <!-- 
     <% %> - Javascript
     <%= %> - Rendering
  -->
-    <% for(var i=0; i < userEvents.length; i++)  {%>
 
-        <% let userEvent = {} %>
-        <% userEvent.Title = userEvents[i].Title %>
-        <% userEvent.Start = userEvents[i].Start %>
-        <% userEvent.End = userEvents[i].End %>
-        <% userEvent.Date = userEvents[i].eventDate %>
-    
-        <%//year month day %>
-        <% userEvent.Day = userEvents[i].eventDate.split('-')[2].replace('0','') %>
-        <% userEvent.Month = userEvents[i].eventDate.split('-')[1].replace('0','') %>
-        <% userEvent.Year = userEvents[i].eventDate.split('-')[0] %>
+    <footer>
+        <p>Norwich
+            Research
+            Park,
+            Norwich
+            NR4
+            7TJ,
+            Norwich,
+            England
+            –
+            ©University
+            of
+            East
+            Anglia.
+            All
+            rights
+            reserved​
+        </p>
+    </footer>
+</body>
 
-        <%//Works printing out current date %>
-        <%//Some how work out which div its in? %>
-        <% const dt = new Date; %>
-        <% dt.setMonth(new Date().getMonth()); %>
-        <% console.log(dt) %>
-        
-
-
-
-        <% const eventDate = userEvent.Day + '-' + userEvent.Month + '-' + userEvent.Year; %>
-        <%try{%>
-            <%= userEvents  %>
-            <% console.log('It entered the try catch ' + eventDate) %>
-            <% const daySquare = document.getElementByClassName(eventDate) %>
-            <% console.log("Got past daySquare") %>
-            <%if (daySquare != 0) {%>
-                
-                <% console.log('It entered the if statement') %>
-                <%    const eventDiv = document.createElement('div'); %>
-                <%    const eventTitle = document.createElement('div'); %>
-                <%    const eventStart = document.createElement('div'); %>
-                <%    const eventEnd = document.createElement('div'); %>
-                <%    const eventDash = document.createElement('div'); %>
-    
-                <%    eventDiv.classList.add('event'); %>
-                <%    eventTitle.classList.add('eventTitle'); %>
-                <%    eventStart.classList.add('eventStart'); %>
-                <%    eventEnd.classList.add('eventEnd'); %>
-                <%    eventDash.classList.add('eventDash') %>
-    
-                <%    eventTitle.innerText = userEvent.Title; %>
-                <%    eventStart.innerText = userEvent.Start; %>
-                <%    eventEnd.innerText = userEvent.End; %>
-                <%    eventDash.innerText = " - " %>
-    
-                <%    daySquare.appendChild(eventDiv); %>
-                <%    eventDiv.appendChild(eventTitle); %>
-                <%    eventDiv.appendChild(eventStart); %>
-                <%    eventDiv.appendChild(eventDash); %>
-                <%    eventDiv.appendChild(eventEnd); %>
-    
-                <%}%>
-        <%} catch(error){ %>
-            <% console.log("error was thrown") %>
-        <%} %>
-
-        <% } %>
-        <footer>
-            <p>Norwich Research Park, Norwich NR4 7TJ, Norwich, England – ©University of East Anglia. All rights reserved​</p>
-        </footer>
-    </body>
 </html>

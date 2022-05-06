@@ -1,6 +1,7 @@
 let nav = 0;
 let clicked = null;
 
+
 const calendar = document.getElementById('calendar');
 const newEventModal = document.getElementById('newEventModal');
 const deleteEventModal = document.getElementById('deleteEventModal');
@@ -9,6 +10,12 @@ const eventTitleInput = document.getElementById('eventTitleInput');
 const eventStartInput = document.getElementById('eventStartInput');
 const eventEndInput = document.getElementById('eventEndInput');
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+//read json file into javascript file - i assume data is now the json? dont actually know
+fetch('./student-events.json')
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.log(error));
 
 //when click on a date
 function openModal() {
@@ -38,7 +45,10 @@ function load() {
 
     const paddingDays = weekdays.indexOf(dateString.split(', ')[0]);
     console.log(paddingDays)
-    document.getElementById('monthDisplay').innerText = `${dt.toLocaleDateString('en-uk', { month: 'long' })} ${year}`;
+    const monthDisplay = document.getElementById('monthDisplay')
+    monthDisplay.innerText = `${dt.toLocaleDateString('en-uk', { month: 'long' })} ${year}`;
+    monthDisplay.classList = month;
+
 
     var calendarChildren = calendar.children;
 
@@ -49,11 +59,11 @@ function load() {
         daySquare.classList = '';
         daySquare.innerText = '';
         daySquare.style = '';
-        
+
         const dayString = `${month + 1}/${i - paddingDays}/${year}`;
         //if the day is in that month 
-        if (i > paddingDays && i < daysInMonth+paddingDays+1) {
-            daySquare.classList.add(i - paddingDays + '-' + (month+1) + '-' + year);
+        if (i > paddingDays && i < daysInMonth + paddingDays + 1) {
+            daySquare.classList.add(i - paddingDays + '-' + (month + 1) + '-' + year);
             daySquare.innerText = calendarDay;
             calendarDay++;
 
@@ -80,7 +90,6 @@ function closeModal() {
     load();
 }
 
-
 function initButtons() {
     document.getElementById('nextButton').addEventListener('click', () => {
         nav++;
@@ -94,7 +103,7 @@ function initButtons() {
     document.getElementById('cancelButton').addEventListener('click', closeModal);
 }
 initButtons();
-load(); 
+load();
 
 
 /*
