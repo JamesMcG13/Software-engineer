@@ -11,11 +11,24 @@ const eventStartInput = document.getElementById('eventStartInput');
 const eventEndInput = document.getElementById('eventEndInput');
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-//read json file into javascript file - i assume data is now the json? dont actually know
-fetch('./student-events.json')
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.log(error));
+const api_url = './student-events.json';
+// Defining async function
+//Call load with data as a parameter
+//Data then went through in load function
+//getapi called each time load would be 
+
+async function getapi(url) {
+
+    // Storing response
+    const response = await fetch(url);
+
+    // Storing data in form of JSON
+    var eventsJson = await response.json();
+    //console.log(data);
+    load(eventsJson);
+}
+
+
 
 //when click on a date
 function openModal() {
@@ -23,7 +36,7 @@ function openModal() {
     backDrop.style.display = 'block';
 }
 
-function load() {
+function load(eventsJson) {
     const dt = new Date;
     if (nav !== 0) {
         dt.setMonth(new Date().getMonth() + nav);
@@ -49,6 +62,10 @@ function load() {
     monthDisplay.innerText = `${dt.toLocaleDateString('en-uk', { month: 'long' })} ${year}`;
     monthDisplay.classList = month;
 
+    //printing all events to console - can get removed
+    for (var i = 0; i < eventsJson.length; i++) {
+        console.log(eventsJson[i].eventDate);
+    }
 
     var calendarChildren = calendar.children;
 
@@ -60,10 +77,13 @@ function load() {
         daySquare.innerText = '';
         daySquare.style = '';
 
-        const dayString = `${month + 1}/${i - paddingDays}/${year}`;
         //if the day is in that month 
         if (i > paddingDays && i < daysInMonth + paddingDays + 1) {
-            daySquare.classList.add(i - paddingDays + '-' + (month + 1) + '-' + year);
+            if (i - paddingDays < 10) var dd = '0' + (i - paddingDays);
+            if ((month + 1) < 10) var mm = '0' + (month + 1);
+            //year month day
+            var dayString = year + '-' + mm + '-' + dd;
+            daySquare.classList.add(dayString);
             daySquare.innerText = calendarDay;
             calendarDay++;
 
@@ -72,14 +92,55 @@ function load() {
                 daySquare.style.backgroundColor = '#e8faed';
             }
 
+            //Gets stuck and the daystring entering is always 22-05-09???
+            for (var j = 0; j < eventsJson.length; j++) {
+                try {
+                    console.log("Day string entering : " + dayString);
+                    if (dayString === eventsJson[j].eventDate) {
+                        console.log("Got through" + dayString + "  " + j);
+                        createEvent(daySquare, eventsJson[j]);
+                        break;
+                    }
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+
         } else {
             daySquare.classList.add('padding');
             daySquare.innerText = '';
         }
+
     }
 
     //console.log(paddingDays);
 }
+
+function createEvent(eventDay, eventDetails) {
+    const eventDiv = document.createElement('div');
+    const eventTitle = document.createElement('div');
+    const eventStart = document.createElement('div');
+    const eventEnd = document.createElement('div');
+    const eventDash = document.createElement('div');
+
+    eventDiv.classList.add('event');
+    eventTitle.classList.add('eventTitle');
+    eventStart.classList.add('eventStart');
+    eventEnd.classList.add('eventEnd');
+    eventDash.classList.add('eventDash')
+
+    eventTitle.innerText = `${eventDetails.Title}`;
+    eventStart.innerText = `${eventDetails.Start}`;
+    eventEnd.innerText = `${eventDetails.End}`;
+    eventDash.innerText = " - "
+
+    eventDay.appendChild(eventDiv);
+    eventDiv.appendChild(eventTitle);
+    eventDiv.appendChild(eventStart);
+    eventDiv.appendChild(eventDash);
+    eventDiv.appendChild(eventEnd);
+}
+
 
 function closeModal() {
     newEventModal.style.display = 'none';
@@ -87,23 +148,23 @@ function closeModal() {
     eventTitleInput.value = '';
     eventStartInput.value = '';
     eventEndInput.value = '';
-    load();
+    getapi(api_url);
 }
 
 function initButtons() {
     document.getElementById('nextButton').addEventListener('click', () => {
         nav++;
-        load();
+        getapi(api_url);
     });
     document.getElementById('backButton').addEventListener('click', () => {
         nav--;
-        load();
+        getapi(api_url);
     });
     newEvent.addEventListener('click', () => openModal());
     document.getElementById('cancelButton').addEventListener('click', closeModal);
 }
 initButtons();
-load();
+getapi(api_url);
 
 
 /*

@@ -2,6 +2,7 @@ if(process.env.NODE_ENV!== 'production'){
   require('dotenv').config()
 }
 const express = require('express');
+const fs = require('fs');
 const app = express();
 const path = require('path');
 const bcrypt = require('bcrypt');
@@ -87,7 +88,11 @@ app.post('/register',checkNotAuthenticated, async (req, res) => {
 })
 
 app.get('/',checkAuthenticated, (req,res) => {
-  res.render('index.ejs',{name: req.user.fname})
+  res.render('index.ejs',{name: req.user.fname});
+
+  const user = req.user
+  let data = JSON.stringify(user.events);
+  fs.writeFileSync('Views/student-events.json', data);
 });
 
 
@@ -199,6 +204,7 @@ app.get('/calendar', checkAuthenticated, (req, res) => {
  //FELIX CALENDAR
 
 
+
 //saving an event
  app.post('/saveEvent',checkAuthenticated, async (req, res) => {
   const user = req.user
@@ -210,6 +216,7 @@ app.get('/calendar', checkAuthenticated, (req, res) => {
       Start: req.body.eventStart,
       End: req.body.eventEnd
     })
+
     //writing out updated array to json file
     let data = JSON.stringify(user.events);
     fs.writeFileSync('Views/student-events.json', data);
