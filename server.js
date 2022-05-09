@@ -1,6 +1,7 @@
 if(process.env.NODE_ENV!== 'production'){
   require('dotenv').config()
 }
+
 const express = require('express');
 const fs = require('fs');
 const app = express();
@@ -14,7 +15,6 @@ const methodOverride = require('method-override')
 
 const initializePassport = require('./passport');
 const { CLIENT_RENEG_LIMIT } = require('tls');
-const { response } = require('express');
 initializePassport(
   passport,
   email => users.find(user => user.email === email),
@@ -228,6 +228,18 @@ app.get('/calendar', checkAuthenticated, (req, res) => {
   }
   console.log(user.events)
 })
+
+app.post('/removeEvent', checkAuthenticated, async (req,res) => {
+  const user = req.user
+  try{
+    remainingArr = user.events.filter(data => data.id != req.body.removeID);
+    user.events = remainingArr;
+    res.redirect('/calendar');
+  }catch(error){
+  }
+  console.log(user.events)
+})
+
 
 
 
