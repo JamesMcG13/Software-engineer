@@ -106,7 +106,7 @@
                     <p id="eventID"></p>
                     <input class="eventForm" type="text" id="removeID" name="removeID">
                     <button id="deleteButton" type = "submit">Delete</button>
-                    <button id="closeButton">Close</button>
+                    <button id="closeButton" type = "cancel">Close</button>
             </form>
             </div>
             
@@ -114,60 +114,6 @@
     <script src="./calendar.js"></script>
     <script src="scripts.js"></script>
 
-    <!-- 
-    <% %> - Javascript
-    <%= %> - Rendering
- -->
-    <% for(var i=0; i < userEvents.length; i++)  {%>
-
-        <% let userEvent = {} %>
-        <% userEvent.Title = userEvents[i].Title %>
-        <% userEvent.Start = userEvents[i].Start %>
-        <% userEvent.End = userEvents[i].End %>
-        <% userEvent.Date = userEvents[i].eventDate %>
-        <%//year month day %>
-        <% userEvent.Day = userEvents[i].eventDate.split('-')[2].replace('0','') %>
-        <% userEvent.Month = userEvents[i].eventDate.split('-')[1].replace('0','') %>
-        <% userEvent.Year = userEvents[i].eventDate.split('-')[0] %>
-        
-        <% const eventDate = userEvent.Day + '-' + userEvent.Month + '-' + userEvent.Year; %>
-        <%try{%>
-            <%= userEvents  %>
-            <% console.log('It entered the try catch ' + eventDate) %>
-            <% const daySquare = document.getElementByClassName(eventDate) %>
-            <% console.log("Got past daySquare") %>
-            <%if (daySquare != 0) {%>
-                
-                <% console.log('It entered the if statement') %>
-                <%    const eventDiv = document.createElement('div'); %>
-                <%    const eventTitle = document.createElement('div'); %>
-                <%    const eventStart = document.createElement('div'); %>
-                <%    const eventEnd = document.createElement('div'); %>
-                <%    const eventDash = document.createElement('div'); %>
-    
-                <%    eventDiv.classList.add('event'); %>
-                <%    eventTitle.classList.add('eventTitle'); %>
-                <%    eventStart.classList.add('eventStart'); %>
-                <%    eventEnd.classList.add('eventEnd'); %>
-                <%    eventDash.classList.add('eventDash') %>
-    
-                <%    eventTitle.innerText = userEvent.Title; %>
-                <%    eventStart.innerText = userEvent.Start; %>
-                <%    eventEnd.innerText = userEvent.End; %>
-                <%    eventDash.innerText = " - " %>
-    
-                <%    daySquare.appendChild(eventDiv); %>
-                <%    eventDiv.appendChild(eventTitle); %>
-                <%    eventDiv.appendChild(eventStart); %>
-                <%    eventDiv.appendChild(eventDash); %>
-                <%    eventDiv.appendChild(eventEnd); %>
-    
-                <%}%>
-        <%} catch(error){ %>
-            <% console.log("error was thrown") %>
-        <%} %>
-
-        <% } %>
         <footer>
             <p>Norwich Research Park, Norwich NR4 7TJ, Norwich, England – ©University of East Anglia. All rights reserved​</p>
         </footer>

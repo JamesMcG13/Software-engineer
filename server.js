@@ -211,7 +211,7 @@ app.post('/saveEvent', checkAuthenticated, async (req, res) => {
 
   try {
     user.events.push({
-      eventID: user.events.length,
+      eventID: user.events.length + 1,
       eventDate: req.body.eventDate,
       Title: req.body.eventTitle,
       Start: req.body.eventStart,
@@ -235,6 +235,9 @@ app.post('/removeEvent', checkAuthenticated, async (req, res) => {
   try {
     remainingArr = user.events.filter(data => data.eventID != req.body.removeID);
     user.events = remainingArr;
+
+    let data = JSON.stringify(user.events);
+    fs.writeFileSync('Views/student-events.json', data);
     res.redirect('/calendar');
   } catch (error) {
   }

@@ -151,13 +151,9 @@ function closeModal() {
     getapi(api_url);
 }
 
-//set delete event modal characteristics to whatever they clicked on
-//Get them to retype ID as a check they want to delete it 
-//Send that number to node server and remove the element from the array
+//need to make it so they can only delete event if eventDeleteID == eventID otherwise it will cancel any event of the id they put in
 function openDeleteEventModal(eventDetails){
-    var eventTitle = document.getElementById('eventTitle');
     var eventDeleteID = document.getElementById('eventID');
-    eventTitle.innerText = eventDetails.Title;
     eventDeleteID.innerText = eventDetails.eventID;
     deleteEventModal.style.display = 'block';
 
