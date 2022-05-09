@@ -99,11 +99,13 @@
                 <button id="cancelButton">Cancel</button>    
             </div>  
             <div id="modalBackDrop"></div>
+            <!-- Delete event modal -->
             <div id="deleteEventModal">
                 <form action="/removeEvent" method="POST">
-                    <h2>Event</h2>
-                    <p id="eventText"></p>
-                    <button id="deleteButton">Delete</button>
+                    <p id="eventTitle"></p>
+                    <p id="eventID"></p>
+                    <input class="eventForm" type="text" id="removeID" name="removeID">
+                    <button id="deleteButton" type = "submit">Delete</button>
                     <button id="closeButton">Close</button>
             </form>
             </div>

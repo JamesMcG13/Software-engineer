@@ -1,4 +1,4 @@
-if(process.env.NODE_ENV!== 'production'){
+if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 
@@ -31,14 +31,14 @@ const users = [{
   password: '$2b$10$yvfs1CMFPJ.Izs4u/KMgd.2H.2I8bYTsxasm2R7oj03fmL7NB6YNi',
   events: []
 }]
-const currentUser=null
+const currentUser = null
 
 app.use(express.static(__dirname + '/Views'));
 app.use(express.urlencoded({
-    extended: false
+  extended: false
 }));
 app.use(express.json());
-process.env.NODE_TLS_REJECT_UNAUTHORIZED='0';
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 app.set('view-engine', 'ejs')
 app.use(flash())
@@ -51,25 +51,25 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
 
-app.get('/login',checkNotAuthenticated, (req,res) => {
+app.get('/login', checkNotAuthenticated, (req, res) => {
   res.render('login.ejs')
 });
 
-app.post('/login',checkNotAuthenticated, passport.authenticate('local', {
+app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/login',
   failureFlash: true
 }))
 
-app.get('/register', (req,res) => {
+app.get('/register', (req, res) => {
   res.render('register.ejs')
 });
 
-app.post('/register',checkNotAuthenticated, async (req, res) => {
+app.post('/register', checkNotAuthenticated, async (req, res) => {
   try {
-    
+
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
-    
+
     users.push({
       id: Date.now().toString(),
       email: req.body.email,
@@ -79,7 +79,7 @@ app.post('/register',checkNotAuthenticated, async (req, res) => {
       password: hashedPassword,
       events: []
     })
-    
+
     res.redirect('/login')
   } catch {
     res.redirect('/register')
@@ -87,8 +87,8 @@ app.post('/register',checkNotAuthenticated, async (req, res) => {
   console.log(users)
 })
 
-app.get('/',checkAuthenticated, (req,res) => {
-  res.render('index.ejs',{name: req.user.fname});
+app.get('/', checkAuthenticated, (req, res) => {
+  res.render('index.ejs', { name: req.user.fname });
 
   const user = req.user
   let data = JSON.stringify(user.events);
@@ -99,7 +99,7 @@ app.get('/',checkAuthenticated, (req,res) => {
 
 //get user array, needs to be in login page
 app.get('/users', (req, res) => {
-    res.json(users)
+  res.json(users)
 })
 
 //add to user array, needs to be in register.js
@@ -107,60 +107,60 @@ app.get('/users', (req, res) => {
 
 
 app.post('/users', async (req, res) => {
-    try {
-      const hashedPassword = await bcrypt.hash(req.body.password, 10)
-      const user = { email: req.body.email, password: hashedPassword }
-      users.push(user)
-      res.status(201).send()
-    } catch {
-      res.status(500).send()
-    }
-  })
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10)
+    const user = { email: req.body.email, password: hashedPassword }
+    users.push(user)
+    res.status(201).send()
+  } catch {
+    res.status(500).send()
+  }
+})
 
 app.post('/users/login', async (req, res) => {
-    const user = users[0]//.find(user => user.email === req.body.email)
-    if (user == null) {
-      return res.status(400).send('Cannot find user')
-    }
-    console.log(user.email)
-    console.log(user.password)
-    const hashedPassword = await bcrypt.hash(req.body.password, 10)
-    try {
-        if(await bcrypt.compare(req.body.password, user.password)) {
-        res.send('Success')
-        } else {
-        res.send('Not Allowed')
-        }
-    } catch {
-      res.status(500).send()
-    }
-    
-  })
-
-  app.delete('/logout', (req, res) => {
-    req.logOut()
-    res.redirect('/login')
-  })
-
-  function checkAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
-      return next()
-    }
-  
-    res.redirect('/login')
+  const user = users[0]//.find(user => user.email === req.body.email)
+  if (user == null) {
+    return res.status(400).send('Cannot find user')
   }
-  
-  function checkNotAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
-      return res.redirect('/')
+  console.log(user.email)
+  console.log(user.password)
+  const hashedPassword = await bcrypt.hash(req.body.password, 10)
+  try {
+    if (await bcrypt.compare(req.body.password, user.password)) {
+      res.send('Success')
+    } else {
+      res.send('Not Allowed')
     }
-    next()
+  } catch {
+    res.status(500).send()
   }
+
+})
+
+app.delete('/logout', (req, res) => {
+  req.logOut()
+  res.redirect('/login')
+})
+
+function checkAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next()
+  }
+
+  res.redirect('/login')
+}
+
+function checkNotAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return res.redirect('/')
+  }
+  next()
+}
 
 
 //writes to console to indicate the server is running
 app.listen(3000, () => {
-    console.log('Server is running on port: ', 3000);
+  console.log('Server is running on port: ', 3000);
 });
 
 //dom favicon
@@ -173,12 +173,12 @@ app.use('/favicon.ico', express.static('images/favicon2.ico'));
 //About page route
 app.get('/about', (req, res) => {
   res.render('about.ejs');
- });
+});
 
 //Help page route
 app.get('/help', (req, res) => {
   res.render('help.ejs');
- });
+});
 
 //social media picture routes
 app.use('/facebook.png', express.static('images/facebook.png'));
@@ -189,29 +189,30 @@ app.get('/calendar', checkAuthenticated, (req, res) => {
   const user = req.user
 
   res.render('calendar.ejs', {
-    userEvents : user.events
+    userEvents: user.events
   });
- });
+});
 
- app.get('/fileupload', (req, res) => {
+app.get('/fileupload', (req, res) => {
   res.render('fileupload.ejs');
- });
+});
 
- app.get('/uploadedPage', (req, res) => {
+app.get('/uploadedPage', (req, res) => {
   res.render('uploadedpage.ejs');
- });
+});
 
- //FELIX CALENDAR
+//FELIX CALENDAR
 
 
 
 //saving an event
- app.post('/saveEvent',checkAuthenticated, async (req, res) => {
+app.post('/saveEvent', checkAuthenticated, async (req, res) => {
   const user = req.user
-  
+
   try {
     user.events.push({
-      eventDate : req.body.eventDate,
+      eventID: user.events.length,
+      eventDate: req.body.eventDate,
       Title: req.body.eventTitle,
       Start: req.body.eventStart,
       End: req.body.eventEnd
@@ -229,13 +230,13 @@ app.get('/calendar', checkAuthenticated, (req, res) => {
   console.log(user.events)
 })
 
-app.post('/removeEvent', checkAuthenticated, async (req,res) => {
+app.post('/removeEvent', checkAuthenticated, async (req, res) => {
   const user = req.user
-  try{
-    remainingArr = user.events.filter(data => data.id != req.body.removeID);
+  try {
+    remainingArr = user.events.filter(data => data.eventID != req.body.removeID);
     user.events = remainingArr;
     res.redirect('/calendar');
-  }catch(error){
+  } catch (error) {
   }
   console.log(user.events)
 })

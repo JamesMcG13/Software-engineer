@@ -136,7 +136,7 @@ function createEvent(eventDay, eventDetails) {
     eventDiv.appendChild(eventEnd);
 
     eventDiv.addEventListener('click',() => {
-        deleteEventModal.style.display = 'block';
+        openDeleteEventModal(eventDetails);
     });
 }
 
@@ -148,7 +148,19 @@ function closeModal() {
     eventTitleInput.value = '';
     eventStartInput.value = '';
     eventEndInput.value = '';
-    load();
+    getapi(api_url);
+}
+
+//set delete event modal characteristics to whatever they clicked on
+//Get them to retype ID as a check they want to delete it 
+//Send that number to node server and remove the element from the array
+function openDeleteEventModal(eventDetails){
+    var eventTitle = document.getElementById('eventTitle');
+    var eventDeleteID = document.getElementById('eventID');
+    eventTitle.innerText = eventDetails.Title;
+    eventDeleteID.innerText = eventDetails.eventID;
+    deleteEventModal.style.display = 'block';
+
 }
 
 
