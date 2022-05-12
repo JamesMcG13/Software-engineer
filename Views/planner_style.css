@@ -1,4 +1,8 @@
 /* general css/whole site styling */
+
+.cw1{
+  visibility: hidden;
+}
 html{
   scroll-behavior: smooth;
 }
@@ -16,6 +20,17 @@ footer {
   height: 1.6vw;
   bottom: 0;
   left:0;
+}
+.flex-row-container{
+  padding-top:3vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.flex-row-container > div{
+  font-size: 1vw;
+  margin-right:2vw;
 }
 .darkMode{
   background-color: rgba(0, 0, 0, 0.959);
@@ -65,6 +80,7 @@ footer {
   border-radius: 10px;
   color: white;
 }
+
 /* start of header css */
 .top-bar{
   margin: 0;
@@ -186,6 +202,25 @@ footer {
 /* end login page */
 
 /* button css */
+.module-button{
+  display:flex;
+  width: 80vw !important;
+  background-image: url(https://c1.wallpaperflare.com/preview/69/791/706/uea-university-east-anglia-lasdun.jpg);
+  background-color: #2468B8A1;
+  background-repeat: no-repeat;
+  background-attachment:fixed;
+  background-position: right; 
+  border:white;
+  color: white;
+  font-size: 1.3vw;
+  margin: 1vw;
+  cursor: pointer;
+  border-radius: 10px;
+  height:100px;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  background-size:75vw;
+
+}
 #colorBtn{
   cursor:pointer;
   font:inherit;
@@ -270,7 +305,6 @@ footer {
   width: 75px;
   cursor: pointer;
   box-shadow: 0px 0px 2px gray;
-  border: none;
   outline: none;
   padding: 5px;
   border-radius: 5px;

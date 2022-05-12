@@ -68,11 +68,24 @@
                 <h1><u>Study Dashboard</u></h1>
                 Missed deadlines:
                 These deadlines are beyond their hand-in date.
-                Please get in contact with your tutor about solving this issue.
+                Please get in contact with your tutor about solving this issue.<br><br>
+
+                <% for(var i=0; i < past_deadlines.length; i++) { %>
+                    <tr>
+                      <td><%= past_deadlines[i].name %></td>
+                      <td><%= past_deadlines[i].end %></td>
+                    </tr><br>
+                 <% } %>
             </div>
             
             <div id="upcoming-deadlines" class="dashboard-container">
                 <h2>Upcoming deadlines</h2>
+                <% for(var i=0; i < upcoming_deadlines.length; i++) { %>
+                    <tr>
+                      <td><%= upcoming_deadlines[i].name %></td>
+                      <td><%= upcoming_deadlines[i].end %></td>
+                    </tr><br>
+                 <% } %>
                 <h2>Activities left to do</h2>
             </div>
 

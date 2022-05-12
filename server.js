@@ -31,8 +31,10 @@ const users = [{
   dob: '',
   password: '$2b$10$yvfs1CMFPJ.Izs4u/KMgd.2H.2I8bYTsxasm2R7oj03fmL7NB6YNi',
   events: [],
-  modules: []
+  modules : []
 }]
+
+//
 modules = []
 const currentUser=null
 
@@ -92,60 +94,155 @@ app.post('/register',checkNotAuthenticated, async (req, res) => {
 })
 
 app.get('/',checkAuthenticated, (req,res) => {
-      res.render('index.ejs',{name: req.user.fname})
+  user = req.user
+  
+  upcoming_deadlines = []
+  past_deadlines = []
+ 
+
+  modules = user.modules[0]
+
+  for(e in modules){
+    
+    for(c in modules[e].coursework){
+      
+      
+      cw_name = modules[e].coursework[c].name
+      cw_end = modules[e].coursework[c].end
+      
+      cw_date = new Date(cw_end)
+
+      var today = new Date();
+      var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      var dateTime = date+' '+time;
+      current_date = new Date(dateTime)
+      
+      //if statement to check date
+      if(cw_date>current_date){
+        upcoming_deadlines.push({
+        name : cw_name,
+        end : cw_end
+      })
+      }else{
+        past_deadlines.push({
+          name : cw_name,
+          end : cw_end
+        })
+      }
+      
+    }
+    
+  }
+  console.log(upcoming_deadlines)
+  
+  res.render('index.ejs',{deadlines: upcoming_deadlines, past_deadlines: past_deadlines})
 });
 app.get('/module_creator',checkAuthenticated, (req,res) => {
   res.render('module_creator.ejs')
 });
 app.post('/module_creator',checkAuthenticated, async (req, res) => {
-  try {
-    
-   
-   
-    
+  try { 
     console.log("1")
     var obj = {
       table: []
     };
 
-   obj.table.push({
-    name : req.body.moduleName,
-    code : req.body.moduleCode,  
-    start : req.body.moduleStart,
-    end : req.body.moduleEnd,
-    coursework : [
-      {
-        name : req.body.courseworkName1,
-        type : req.body.courseworkType1,
-        start: req.body.courseworkStart1,
-        end : req.body.courseworkEnd1
-      }, 
-      {
-        name : req.body.courseworkName2,
-        type : req.body.courseworkType2,
-        start: req.body.courseworkStart2,
-        end : req.body.courseworkEnd2 
-      },
-      {
-        name : req.body.courseworkName3,
-        type : req.body.courseworkType3,
-        start: req.body.courseworkStart3,
-        end : req.body.courseworkEnd3 
-      }
+    obj.table.push({
+      name : req.body.moduleName1,
+      code : req.body.moduleCode1,  
+      year : req.body.moduleStart1,
+      semester : req.body.moduleEnd1,
+      coursework : [
+        {
+          name : req.body.coursework1Name1,
+          type : req.body.coursework1Type1,
+          weighting: req.body.coursework1Weighting1,
+          start: req.body.coursework1Start1,
+          end : req.body.coursework1End1
+        },
+        {
+          name : req.body.coursework1Name2,
+          type : req.body.coursework1Type2,
+          weighting: req.body.coursework1Weighting2,
+          start: req.body.coursework1Start2,
+          end : req.body.coursework1End2
+        },
+        {
+          name : req.body.coursework1Name3,
+          type : req.body.coursework1Type3,
+          weighting: req.body.coursework1Weighting3,
+          start: req.body.coursework1Start3,
+          end : req.body.coursework1End3
+        }
+      ]
+    },
+    {
+      name : req.body.moduleName2,
+      code : req.body.moduleCode2,  
+      year : req.body.moduleStart2,
+      semester : req.body.moduleEnd2,
+      coursework : [
+        {
+          name : req.body.coursework2Name1,
+          type : req.body.coursework2Type1,
+          weighting: req.body.coursework2Weighting1,
+          start: req.body.coursework2Start1,
+          end : req.body.coursework2End1
+        },
+        {
+          name : req.body.coursework2Name2,
+          type : req.body.coursework2Type2,
+          weighting: req.body.coursework2Weighting2,
+          start: req.body.coursework2Start2,
+          end : req.body.coursework2End2
+        },
+        {
+          name : req.body.coursework2Name3,
+          type : req.body.coursework2Type3,
+          weighting: req.body.coursework2Weighting3,
+          start: req.body.coursework2Start3,
+          end : req.body.coursework2End3
+        }
     ]
-   })
-   
-
+    },
+        {
+        name : req.body.moduleName3,
+        code : req.body.moduleCode3,  
+        year : req.body.moduleStart3,
+        semester : req.body.moduleEnd3,
+          coursework : [
+            {
+              name : req.body.coursework3Name1,
+              type : req.body.coursework3Type1,
+              weighting: req.body.coursework3Weighting1,
+              start: req.body.coursework3Start1,
+              end : req.body.coursework3End1
+            },
+            {
+              name : req.body.coursework3Name2,
+              type : req.body.coursework3Type2,
+              weighting: req.body.coursework3Weighting2,
+              start: req.body.coursework3Start2,
+              end : req.body.coursework3End2
+            },
+            {
+              name : req.body.coursework3Name3,
+              type : req.body.coursework3Type3,
+              weighting: req.body.coursework3Weighting3,
+              start: req.body.coursework3Start3,
+              end : req.body.coursework3End3
+            }
+        ]
+        
+  })
+  console.log("---------obj.table[0]: ")
+    console.log(obj.table[0])
     console.log("2")
     var fs = require('fs');
     console.log("3")
     console.log(JSON.stringify(obj))
     fs.writeFile('module.json', JSON.stringify(obj), error => console.error)
-   
-    
-    
-
-
     //res.redirect('/module_creator')
   } catch {
     res.redirect('/')
@@ -258,16 +355,18 @@ app.get('/calendar', (req, res) => {
  app.post('/uploadModule', checkAuthenticated, (req, res) => {
   fileData = req.body.uploadedFile
   
+  
   const jsonString = fs.readFileSync(fileData);
   const parsedFile = JSON.parse(jsonString);
-  const module = parsedFile.table[0]
   
-  console.log(module)
+  const modules = parsedFile.table
+  console.log("-----module-----")
+  console.log(modules[0])
 
   const user = req.user
-  user.modules.push(module)
+  user.modules.push(modules) //nested arrays needs fixing
   
-  res.render('uploadedpage.ejs',{module: module});
+  res.render('uploadedpage.ejs',{modules: modules});
  });
 
  //FELIX CALENDAR

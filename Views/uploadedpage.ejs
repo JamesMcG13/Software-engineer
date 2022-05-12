@@ -61,31 +61,59 @@
 		</header>
        
         <div class="content-container">
-            <div class="upload-container">
-            <p>
-                <label for="coursework">Module:</label><br>
-                <select id="module-select" name="module-select">
-                    <option selected disabled>Select...</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select><br>  
+            <div class="upload-container">          
+                <br>
+                <button class="module-button" id="module1" type="text"  onclick="showModule1()"><%= modules[0].name %></button>
+                <button class="module-button" id="module2" type="text"  onclick="showModule2()"><%= modules[1].name %></button>
+                <button class="module-button" id="module3" type="text"  onclick="showModule3()"><%= modules[2].name %></button>
+                <br>  
+                </div>
+                
 
-                <u>Module 1</u><br><br>
-                name: <%= module.name %><br>
-                start: <%= module.start %><br>
-                end: <%= module.end %><br>
-                code: <%= module.code %><br>
-                coursework: <%= module.coursework %><br>
-                exams: <%= module.exams %><br>
-                weightings: <%= module.weightings %><br>
-                deadlines: <%= module.deadlines %><br>
+                <div class="coursework-container" id="module-1">
+                <br>
+    
+                <u>Name</u><br> <%= modules[0].name %><br>
+                <u>Year</u><br> <%= modules[0].year %><br>
+                <u>Semester</u><br> <%= modules[0].semester %><br>
+                <u>Code</u><br> <%= modules[0].code %><br>
+                <u>Assessment 1</u><br> <%= modules[0].coursework[0].name[0] %> -  <%=modules[0].coursework[0].type[0] %><br>
+                <u>Assessment 2</u><br> <%= modules[0].coursework[1].name[1] %> -  <%= modules[0].coursework[0].type[1]  %><br>
+                <u>Assessment 3</u><br> <%= modules[0].coursework[2].name[2] %> -  <%= modules[0].coursework[0].type[2]  %><br>
+                <u>Weighting</u><br> <%= modules[0].coursework[0].weighting %><br>
+                <u>Deadlines</u><br> <%= modules[0].coursework[0].end %><br>
+                </div>
+                
+                <div class="coursework-container" id="module-2">
+                    <br>
+                
+                    <u>Name</u><br> <%= modules[1].name %><br>
+                    <u>Year</u><br> <%= modules[1].year %><br>
+                    <u>Semester</u><br> <%= modules[1].semester %><br>
+                    <u>Code</u><br> <%= modules[1].code %><br>
+                    <u>Assessment 1</u><br> <%= modules[1].coursework[0].name[0] %> -  <%= modules[1].coursework[0].type[0] %><br>
+                    <u>Assessment 2</u><br> <%= modules[1].coursework[1].name[1] %> -  <%= modules[1].coursework[0].type[1]  %><br>
+                    <u>Assessment 3</u><br> <%= modules[1].coursework[2].name[2] %> -  <%= modules[1].coursework[0].type[2]  %><br>
+                    <u>Weighting</u><br> <%= modules[1].coursework[1].weighting %><br>
+                    <u>Deadlines</u><br> <%= modules[1].coursework[1].end %><br>
+                </div>
 
-                <br><u>Module 2</u><br><br>
-
-                <br><u>Module 3</u><br><br>
-            </p>
-            </div>
+                <div class="coursework-container" id="module-3">
+                    <br>
+                
+                    <u>Name</u><br> <%= modules[2].name %><br>
+                    <u>Year</u><br> <%= modules[2].year %><br>
+                    <u>Semester</u><br> <%= modules[2].semester %><br>
+                    <u>Code</u><br> <%= modules[2].code %><br>
+                    <u>Assessment 1</u><br> <%= modules[2].coursework[0].name[0] %> -  <%=modules[2].coursework[0].type[0] %><br>
+                    <u>Assessment 2</u><br> <%= modules[2].coursework[1].name[1] %> -  <%= modules[2].coursework[0].type[1]  %><br>
+                    <u>Assessment 3</u><br> <%= modules[2].coursework[2].name[2] %> -  <%= modules[2].coursework[0].type[2]  %><br>
+                    <u>Weighting</u><br> <%= modules[2].coursework[2].weighting %><br>
+                    <u>Deadlines</u><br> <%= modules[2].coursework[2].end %><br>
+                </div>
+                
+        
+           
 
 
 </form>
