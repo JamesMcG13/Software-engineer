@@ -101,7 +101,7 @@
                     </script>
 
                     <% if(Math.round((total_times[i]/activities[i].time)*100)>100) { %>
-
+    
                         <script>
                             document.getElementById('prog-bar-green<%=i%>').style.setProperty('width', '100%')
                             document.getElementById('prog-bar-green<%=i%>').style.setProperty('background-color', 'green')
@@ -110,6 +110,10 @@
                     <% } %>
                 </div><br><br>
             <% } %>
+
+            <div>
+                <button id="newMilestone">Add progress</button>
+            </div>
 
             <div id="gantt-chart" class="dashboard-container">
                 <h2>Gantt Chart</h2>
@@ -130,11 +134,36 @@
                     </ul>
                   </div>
             </div>
-                
+            <div id="milestonesBackDrop"></div>
+            <div id="milestones">
+                <form action="/milestones" method="POST" id="createMilestone">
+                    <label for="name">Milestone name</label><br>
+                    <input type="text" id="milestoneName" name="milestoneName"><br><br>
+    
+                    <label for="name">Activity</label><br>
+                    <select id="milestoneParent" name="milestoneParent">
+                        <option selected disabled>Select...</option>
+                        <% for(var i=0; i < activities.length; i++) { %>   
+                              <option value="<%= activities[i].parent %> - <%= activities[i].name %>"><%= activities[i].parent %> - <%= activities[i].name %></option>
+                         <% } %>
+                    </select><br><br>
+    
+                    <label for="name">Time (minutes):</label><br>
+                    <input type="number" id="milestoneTime" name="milestoneTime"><br>
+                    <br>
+                    <label for="name">Additional notes:</label><br>
+                    <input type="text" id="additionalNotes" name="additionalNotes"><br>
+                </form>
+                <button class="loginBtn" type="submit" form="createMilestone">Submit</button>
+                <button id="closeButton" type = "cancel">Close</button>
+               
+            </div>
+            </div>
         <p> 
            
         </div>
         
+    <script src="./index.js"></script>
     <script src="scripts.js"></script>
         
         <footer>

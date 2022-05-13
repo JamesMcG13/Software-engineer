@@ -10,21 +10,23 @@ const eventStartInput = document.getElementById('eventStartInput');
 const eventEndInput = document.getElementById('eventEndInput');
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-const api_url = './student-events.json';
+const events_url = './student-events.json';
+const deadlines_url = './student-deadlines.json';
 // Defining async function
 //Call load with data as a parameter
 //Data then went through in load function
 //getapi called each time load would be 
 
-async function getapi(url) {
+async function getapi(url,url1) {
 
     // Storing response
     const response = await fetch(url);
-
+    const response1 = await fetch(url1);
     // Storing data in form of JSON
     var eventsJson = await response.json();
+    var deadlinesJson = await response1.json();
     //console.log(data);
-    load(eventsJson);
+    load(eventsJson,deadlinesJson);
 }
 
 //when click on a date
@@ -33,11 +35,13 @@ function openModal() {
     backDrop.style.display = 'block';
 }
 
-function load(eventsJson) {
+function load(eventsJson,deadlinesJson) {
     const dt = new Date;
     if (nav !== 0) {
         dt.setMonth(new Date().getMonth() + nav);
     }
+
+    console.log(deadlinesJson);
 
     const day = dt.getDate();
     const month = dt.getMonth();
@@ -87,10 +91,20 @@ function load(eventsJson) {
                 //Creates events for dates that have an event
                 for (var j = 0; j < eventsJson.length; j++) {
                     try {
-                        console.log("Day string entering : " + dayString);
                         if (dayString === eventsJson[j].eventDate) {
-                            console.log("Got through" + dayString + "  " + j);
                             createEvent(daySquare, eventsJson[j]);
+                        }
+                    } catch (error) {
+                        console.log(error);
+                    }
+                }
+
+                //puts deadlines on the calendar
+                for (var k = 0; k < deadlinesJson.length; k ++){
+                    try {
+                        if (dayString === deadlinesJson[k].end) {
+                            console.log("Got through" + dayString + "  " + k);
+                            createDeadline(daySquare, deadlinesJson[k]);
                         }
                     } catch (error) {
                         console.log(error);
@@ -140,6 +154,19 @@ function createEvent(eventDay, eventDetails) {
     });
 }
 
+function createDeadline(deadlineDay, deadlineDetails){
+    const deadlineDiv = document.createElement('div');
+    const deadlineTitle = document.createElement('div');
+
+    deadlineDiv.classList.add('deadline');
+    deadlineTitle.classList.add('deadlineTitle');
+
+    deadlineTitle.innerText = `${deadlineDetails.name}`;
+
+    deadlineDay.appendChild(deadlineDiv);
+    deadlineDiv.appendChild(deadlineTitle);
+}
+
 
 function closeModal() {
     newEventModal.style.display = 'none';
@@ -148,7 +175,7 @@ function closeModal() {
     eventTitleInput.value = '';
     eventStartInput.value = '';
     eventEndInput.value = '';
-    getapi(api_url);
+    getapi(events_url,deadlines_url);
 }
 
 //need to make it so they can only delete event if eventDeleteID == eventID otherwise it will cancel any event of the id they put in
@@ -167,14 +194,14 @@ function openDeleteEventModal(eventDetails){
 function initButtons() {
     document.getElementById('nextButton').addEventListener('click', () => {
         nav++;
-        getapi(api_url);
+        getapi(events_url,deadlines_url);
     });
     document.getElementById('backButton').addEventListener('click', () => {
         nav--;
-        getapi(api_url);
+        getapi(events_url,deadlines_url);
     });
     document.getElementById('cancelButton').addEventListener('click', closeModal);
     document.getElementById('newEvent').addEventListener('click',openModal);
 }
 initButtons();
-getapi(api_url);
+getapi(events_url,deadlines_url);

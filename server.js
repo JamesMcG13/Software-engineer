@@ -37,17 +37,20 @@ const users = [{
   milestones : [{
     name: 'homework 1',
     parent: 'Software Engineering - homework',
-    time: '20'
+    time: '20',
+    details: 'Finished my software engineering homework - might need to redo the CSS'
   },
   {
     name: 'homework 2',
     parent: 'Software Engineering - homework',
-    time: '5'
+    time: '5',
+    details: 'Started, got up to doing the css'
   },
   {
     name: 'revision 1',
     parent: 'Data Science - revision',
-    time: '5'
+    time: '5',
+    details: 'Finished topic 5'
   }]
 }]
 
@@ -114,14 +117,17 @@ app.post('/register',checkNotAuthenticated, async (req, res) => {
 })
 
 app.get('/',checkAuthenticated, (req,res) => {
-  user = req.user
-  
+  const user = req.user
+
   upcoming_deadlines = []
   past_deadlines = []
  
-  let data = JSON.stringify(user.events);
-  fs.writeFileSync('Views/student-events.json', data);
+  let dataEvent = JSON.stringify(user.events);
+  fs.writeFileSync('Views/student-events.json', dataEvent);
 
+  let dataDeadlines = JSON.stringify(upcoming_deadlines);
+  fs.writeFileSync('Views/student-deadlines.json', dataDeadlines);
+  
   modules = user.modules[0]
 
   for(e in modules){
@@ -145,6 +151,7 @@ app.get('/',checkAuthenticated, (req,res) => {
         upcoming_deadlines.push({
         name : cw_name,
         end : cw_end
+
       })
       }else{
         past_deadlines.push({
@@ -153,6 +160,9 @@ app.get('/',checkAuthenticated, (req,res) => {
         })
       }
     }
+    
+    let dataDeadlines = JSON.stringify(upcoming_deadlines);
+    fs.writeFileSync('Views/student-deadlines.json', dataDeadlines);
     
   }
 
@@ -424,14 +434,15 @@ app.post('/milestones',checkAuthenticated, async (req, res) => {
     user.milestones.push({
       name : req.body.milestoneName,
       parent : req.body.milestoneParent,
-      time : req.body.milestoneTime
+      time : req.body.milestoneTime,
+      details : req.body.additionalNotes
     })
     
       
   } catch {
     res.redirect('/')
   }
-  res.redirect('milestones')
+  res.redirect('/')
 })
 
 
@@ -486,6 +497,9 @@ app.post('/saveEvent', checkAuthenticated, async (req, res) => {
     let data = JSON.stringify(user.events);
     fs.writeFileSync('Views/student-events.json', data);
     //reload calendar
+    let dataDeadlines = JSON.stringify(upcoming_deadlines);
+    fs.writeFileSync('Views/student-deadlines.json', dataDeadlines);
+
     res.redirect('/calendar')
   } catch {
     console.log('Exception')
