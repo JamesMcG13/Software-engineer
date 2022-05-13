@@ -31,7 +31,24 @@ const users = [{
   dob: '',
   password: '$2b$10$yvfs1CMFPJ.Izs4u/KMgd.2H.2I8bYTsxasm2R7oj03fmL7NB6YNi',
   events: [],
-  modules : []
+  modules : [[{"name":"Software Engineering","code":"5016","coursework":[{"name":"Report","type":"COURSEWORK","weighting":"45","start":"2022-05-01","end":"2022-05-10"},{"name":"Demo","weighting":"45","start":"2022-05-10","end":"2022-05-24"},{"name":"Synoptic","type":"COURSEWORK","weighting":"10","start":"2022-05-20","end":"2022-05-31"}]},{"name":"Data Science","code":"5010","coursework":[{"name":"Stats","type":"EXAM","weighting":"0","start":"2022-05-02","end":"2022-05-12"},{"name":"Machine Learning","type":"EXAM","weighting":"45","start":"2022-05-12","end":"2022-05-26"},{"name":"Synoptic","type":"COURSEWORK","weighting":"10","start":"2022-05-20","end":"2022-05-31"}]},{"name":"Programming","code":"5012","coursework":[{"name":"Java","type":"EXAM","weighting":"30","start":"2022-05-03","end":"2022-05-13"},{"name":"C++","type":"EXAM","weighting":"60","start":"","end":"2022-05-29"},{"name":"Synoptic","type":"COURSEWORK","weighting":"10","start":"2022-05-20","end":"2022-05-31"}]}]],
+  activities : [{ name: 'homework', parent: 'Software Engineering', time: '60' },
+  { name: 'revision', parent: 'Data Science', time: '120' }],
+  milestones : [{
+    name: 'homework 1',
+    parent: 'Software Engineering - homework',
+    time: '20'
+  },
+  {
+    name: 'homework 2',
+    parent: 'Software Engineering - homework',
+    time: '5'
+  },
+  {
+    name: 'revision 1',
+    parent: 'Data Science - revision',
+    time: '5'
+  }]
 }]
 
 //
@@ -83,7 +100,10 @@ app.post('/register',checkNotAuthenticated, async (req, res) => {
       dob: req.body.dob,
       password: hashedPassword,
       events: [],
-      modules: []
+      modules: [],
+      activities : [],
+      milestones : []
+      
     })
     
     res.redirect('/login')
@@ -132,13 +152,36 @@ app.get('/',checkAuthenticated, (req,res) => {
           end : cw_end
         })
       }
-      
     }
     
   }
-  console.log(upcoming_deadlines)
+
+  //activities and milestones
+  totals = []
+  complete = []
+
   
-  res.render('index.ejs',{deadlines: upcoming_deadlines, past_deadlines: past_deadlines})
+  for(a in user.activities){
+    var total = 0
+
+    for(m in user.milestones){
+   
+      if(user.milestones[m].parent.substr(0, user.milestones[m].parent.indexOf(' -'))===user.activities[a].parent){
+        total = total + parseInt(user.milestones[m].time)
+        
+      }
+      
+    }
+    
+    totals[a] = total
+
+  }
+  console.log("TOTALS:")
+  console.log(totals)
+
+  console.log(user)
+  
+  res.render('index.ejs',{deadlines: upcoming_deadlines, past_deadlines: past_deadlines, activities : user.activities, total_times : totals})
 });
 app.get('/module_creator',checkAuthenticated, (req,res) => {
   res.render('module_creator.ejs')
@@ -238,7 +281,7 @@ app.post('/module_creator',checkAuthenticated, async (req, res) => {
         ]
         
   })
-  console.log("---------obj.table[0]: ")
+ 
     console.log(obj.table[0])
     console.log("2")
     var fs = require('fs');
@@ -341,6 +384,57 @@ app.get('/help', (req, res) => {
   res.render('help.ejs');
  });
 
+ app.get('/activities',checkAuthenticated, (req, res) => {
+  const user = req.user
+  modules = user.modules[0]
+  console.log(modules)
+  res.render('activities.ejs',{modules : modules});
+ });
+
+ app.get('/milestones',checkAuthenticated, (req, res) => {
+  const user = req.user
+  activities = user.activities
+  console.log(activities)
+  res.render('milestones.ejs',{activities : activities});
+ });
+
+ app.post('/activities',checkAuthenticated, async (req, res) => {
+  try { 
+    
+    //const user = req.user
+
+    user.activities.push(
+      {
+        name : req.body.activityName,
+        parent : req.body.activityParent,
+        time : req.body.activityTime
+      })
+      
+  } catch {
+    res.redirect('/')
+  }
+  res.redirect('activities')
+})
+
+app.post('/milestones',checkAuthenticated, async (req, res) => {
+  try { 
+    
+    //const user = req.user
+
+    user.milestones.push({
+      name : req.body.milestoneName,
+      parent : req.body.milestoneParent,
+      time : req.body.milestoneTime
+    })
+    
+      
+  } catch {
+    res.redirect('/')
+  }
+  res.redirect('milestones')
+})
+
+
 //social media picture routes
 app.use('/facebook.png', express.static('images/facebook.png'));
 app.use('/twitter.png', express.static('images/twitter.png'));
@@ -370,8 +464,6 @@ app.get('/calendar', (req, res) => {
   
   res.render('uploadedpage.ejs',{modules: modules});
  });
-
- //FELIX CALENDAR
 
 //FELIX CALENDAR
 
@@ -415,4 +507,5 @@ app.post('/removeEvent', checkAuthenticated, async (req, res) => {
   }
   console.log(user.events)
 })
+
 

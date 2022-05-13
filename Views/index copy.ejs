@@ -88,28 +88,29 @@
                  <% } %>
                 <h2>Activities left to do</h2>
             </div>
-            
-            <% for(var i=0; i < activities.length; i++) { %>
-                <h3><%=activities[i].name%> - <%=activities[i].parent%></h3>
+
+                 
+                <% total = (upcoming_deadlines.length + past_deadlines.length) %>
+                <% complete = (past_deadlines.length/total)*100 %>
+                <% not_complete = (upcoming_deadlines.length/total)*100 %>
+
+
+                <h3>Complete Coursework</h3>
                 <div class="prog-bar-background">
-                    <div id="prog-bar-green<%=i%>" class="prog-green"><%=Math.round((total_times[i]/activities[i].time)*100)%>%</div>
-                    
+                    <div id="prog-bar-green" class="prog-bar"><%=Math.round(complete)%>%</div>
                     <script>
-                        document.getElementById('prog-bar-green<%=i%>').style.setProperty('width', '<%=Math.round((total_times[i]/activities[i].time)*100)%>%')
-                        document.getElementById('prog-bar-green<%=i%>').style.setProperty('background-color', 'green')
-                        
+                        document.getElementById('prog-bar-green').style.setProperty('width', '<%= complete %>%')
                     </script>
-
-                    <% if(Math.round((total_times[i]/activities[i].time)*100)>100) { %>
-
-                        <script>
-                            document.getElementById('prog-bar-green<%=i%>').style.setProperty('width', '100%')
-                            document.getElementById('prog-bar-green<%=i%>').style.setProperty('background-color', 'green')
-                            
-                        </script>
-                    <% } %>
-                </div><br><br>
-            <% } %>
+                </div>
+                
+                <h3>Incomplete Coursework</h3>
+                <div class="prog-bar-background">
+                    <div id="prog-bar-red" class="prog-bar"><%=Math.round(not_complete)%>%</div>
+                    <script>
+                        document.getElementById('prog-bar-red').style.setProperty('width', '<%= not_complete %>%')
+                    </script>
+                </div>
+          
 
             <div id="gantt-chart" class="dashboard-container">
                 <h2>Gantt Chart</h2>

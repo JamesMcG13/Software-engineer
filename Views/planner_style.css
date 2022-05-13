@@ -301,6 +301,16 @@ footer {
 /* end upload page */
 
 /* calendar css */
+.nextButton, .backButton, .newEvent{
+  width: 75px;
+  cursor: pointer;
+  box-shadow: 0px 0px 2px gray;
+  border: none;
+  outline: none;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+}
 #headerCalendar {
   padding: 10px;
   color: #d36c6c;

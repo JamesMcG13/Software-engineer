@@ -19,7 +19,6 @@
                 </div>
 
             </div>
-            
 			
 			<div class="navigation-bar">
                 <div id="navigation-container"> 
@@ -29,6 +28,7 @@
                         <li><a href="fileupload">Profile Upload</a></li>
                         <li><a href="about">About</a></li>
                         <li><a href="help">Help</a></li>
+                       
                         <li>
                             <form action="/logout?_method=DELETE" method="POST">
                                 <button class= "logoutBtn" type="submit">Log Out</button>
@@ -61,60 +61,29 @@
 		
 		</header>
        
-        
         <div class="content-container">
-            <div class="containerCalendar">
-                <div id="headerCalendar">
-                    <div id = "monthDisplay"> </div>
-                    <div>
-                        <button id="newEvent">Add event</button>
-                        <button id="backButton">Previous</button>
-                        <button id = "nextButton">Next</button>
-                    </div>
-                </div>
-                </div>
-                <div id="weekdays">
-                    <div>Sunday</div>
-                    <div>Monday</div>
-                    <div>Tuesday</div>
-                    <div>Wednesday</div>
-                    <div>Thursday</div>
-                    <div>Friday</div>
-                    <div>Saturday</div>
-                </div>  
-                <div id="calendar">
-                </div>
-            </div>
-
-            <div id ="newEventModal">
-                <form action="/saveEvent" method="POST">
-                    <h2>New Event</h2>
-                    
-                    <input class="eventForm" type="text" id="eventTitle" name="eventTitle">
-                    <input class="eventForm" type="date" id="eventDate" name="eventDate">
-                    <input class="eventForm" type="time" id="eventStart" name="eventStart">
-                    <input class="eventForm" type="time" id="eventEnd" name="eventEnd">
-                    <button class="saveButton" type="submit">Save</button>
-                </form>
-                <button id="cancelButton">Cancel</button>    
-            </div>  
-            <div id="modalBackDrop"></div>
-            <!-- Delete event modal -->
-            <div id="deleteEventModal">
-                <form action="/removeEvent" method="POST">
-                    <p id="removeEventTitle"></p>
-                    <p id="eventID"></p>
-                    <p id="Message">Please enter the number above and click delete if you'd like to delete the event</p>
-                    <input class="eventForm" type="text" id="removeID" name="removeID">
-                    <button id="deleteButton" type = "submit">Delete</button>
-                    <button id="closeButton" type = "cancel">Close</button>
-            </form>
-            </div>
             
-        </div>
-    <script src="./calendar.js"></script>
-    <script src="scripts.js"></script>
+            <form action="/milestones" method="POST" id="createMilestone">
+                <label for="name">Milestone name</label><br>
+                <input type="text" id="milestoneName" name="milestoneName"><br><br>
 
+                <label for="name">Activity</label><br>
+                <select id="milestoneParent" name="milestoneParent">
+                    <option selected disabled>Select...</option>
+                    <% for(var i=0; i < activities.length; i++) { %>   
+                          <option value="<%= activities[i].parent %> - <%= activities[i].name %>"><%= activities[i].parent %> - <%= activities[i].name %></option>
+                     <% } %>
+                </select><br><br>
+
+                <label for="name">Time (minutes):</label><br>
+                <input type="number" id="milestoneTime" name="milestoneTime"><br>
+            </form>
+            <button class="loginBtn" type="submit" form="createMilestone">Submit</button>
+           
+        </div>
+        
+    <script src="scripts.js"></script>
+        
         <footer>
             <p>Norwich Research Park, Norwich NR4 7TJ, Norwich, England – ©University of East Anglia. All rights reserved​</p>
         </footer>

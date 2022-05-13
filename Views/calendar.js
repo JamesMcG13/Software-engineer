@@ -174,6 +174,7 @@ function initButtons() {
         getapi(api_url);
     });
     document.getElementById('cancelButton').addEventListener('click', closeModal);
+    document.getElementById('newEvent').addEventListener('click',openModal);
 }
 initButtons();
 getapi(api_url);
