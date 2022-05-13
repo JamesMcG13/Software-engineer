@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <title>UEA Study Planner</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="planner_style.css">
+    <style>
+    </style>   
+
+    <body>
+        <!-- scroll to top button -->
+        <button id="scrollBtn" title="Back to top" onclick="topFunction()">↑<br>Back to Top</button>
+    
+        <header> <!-- header contains both nav bar and logo  -->
+            <div class="top-bar">
+                    <img id="uea" src="https://i.imgur.com/G8W14Io.png">
+                    <h1>Student Study Planner</h1>
+                    <img id="logo" src="https://i.imgur.com/Bfrya3f.png​">
+            </div>
+			
+			<div class="navigation-bar">
+                <div id="navigation-container"> 
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="calendar">Calendar</a></li>
+                        <li><a href="fileupload">Profile Upload</a></li>
+                        <li><a href="about">About</a></li>
+                        <li><a href="help">Help</a></li>
+                       
+                        <li>
+                            <form action="/logout?_method=DELETE" method="POST">
+                                <button class= "logoutBtn" type="submit">Log Out</button>
+                            </form>
+                        </li>
+                        <li>
+                            <button id="colorBtn" class="darkMode" onclick="colourFunction()">Toggle Colour</button>
+                        </li>
+                        <!--Added 3 images FELIX-->
+                        <div id="social">
+                            <div id="fb">
+                                <a href="https://facebook.com/ueaofficial/">
+                                    <img id="socialImage" src="/facebook.png">
+                                </a>
+                            </div>
+                            <div id="ig">
+                                <a href="https://instagram.com/uniofeastanglia">
+                                    <img id="socialImage" src="/instagram.png">
+                                </a>
+                            </div>
+                            <div id="tt">
+                                <a href="https://twitter.com/uniofeastanglia">
+                                    <img id="socialImage" href="twitter" src="/twitter.png">
+                                </a>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+		
+		</header>     
+        <div class="content-container">
+            <form action="/module_creator" method="POST" id="moduleForm">
+            <div class="flex-row-container">  
+            <!-- module 1 -->
+            <div class="module" id="module1">
+            
+                <label for="name">Module Name:</label><br>
+                <input class="moduleForm" type="text" id="moduleName1" name="moduleName1"><br>
+                <label for="code">Module Code:</label><br>
+                <input class="moduleForm" type="text" id="moduleCode1" name="moduleCode1"><br>
+                <label for="coursework">Year:</label><br>
+                <input class="moduleForm" type="number" min="2022" max="2099" step="1" value="2022" id="moduleYear1"/><br>
+                <label for="coursework">Semester:</label><br>
+                <input class="moduleForm" type="number" min="1" max="2" step="1" value="1" id="moduleSemester1"/><br>
+                <hr size="2" width="100%" color='grey'>   
+
+                <!--1-->
+                <label for="coursework">Assessment Name:</label><br>
+                <input class="moduleForm" type="text" id="coursework1Name1" name="coursework1Name1"><br>
+
+                <label for="coursework">Assessment Type:</label><br>
+                <select id="coursework1Type1" name="coursework1Type1">
+                    <option selected disabled>Select...</option>
+                    <option value="EXAM">Exam</option>
+                    <option value="COURSEWORK">Coursework</option>
+                    <option value="PRESENTATION">Presentation</option>
+                </select><br> 
+                <label for="coursework">Weighting (0 if formative):</label><br>
+                <input class="moduleForm" type="number" min="0" max="100" step="1" value="0" id="coursework1Weighting1" name="coursework1Weighting1"><br>
+                <label for="coursework">Start:</label><br>
+                <input class="moduleForm" type="date" id="coursework1Start1" name="coursework1Start1"><br>
+                <label for="coursework">End:</label><br>
+                <input class="moduleForm" type="date" id="coursework1End1" name="coursework1End1"><br>
+                <hr size="2" width="100%" color='grey'> 
+
+                <!--2-->
+                <label for="coursework">Assessment Name:</label><br>
+                <input class="moduleForm" type="text" id="coursework1Name2" name="coursework1Name2"><br>
+                <label for="coursework">Assessment Type:</label><br>
+                <select id="coursework1Type2" name="coursework1Type2">
+                    <option selected disabled>Select...</option>
+                    <option value="EXAM">Exam</option>
+                    <option value="COURSEWORK">Coursework</option>
+                    <option value="PRESENTATION">Presentation</option>
+                </select><br> 
+                <label for="coursework">Weighting (0 if formative):</label><br>
+                <input class="moduleForm" type="number" min="0" max="100" step="1" value="0"id="coursework1Weighting2" name="coursework1Weighting2"><br>
+                <label for="coursework">Start:</label><br>
+                <input class="moduleForm" type="date" id="coursework1Start2" name="coursework1Start2"><br>
+                <label for="coursework">End:</label><br>
+                <input class="moduleForm" type="date" id="coursework1End2" name="coursework1End2"><br>
+                <hr size="2" width="100%" color='grey'>
+
+                <!--3-->
+                <label for="coursework">Assessment Name:</label><br>
+                <input class="moduleForm" type="text" id="coursework1Name3" name="coursework1Name3"><br>
+
+                <label for="coursework">Assessment Type:</label><br>
+                <select id="coursework1Type3" name="coursework1Type3">
+                    <option selected disabled>Select...</option>
+                    <option value="EXAM">Exam</option>
+                    <option value="COURSEWORK">Coursework</option>
+                    <option value="PRESENTATION">Presentation</option>
+                </select><br>  
+                <label for="coursework">Weighting (0 if formative):</label><br>
+                <input class="moduleForm" type="number" min="0" max="100" step="1" value="0"id="coursework1Weighting3" name="coursework1Weighting3"><br>
+                <label for="coursework">Start:</label><br>
+                <input class="moduleForm" type="date" id="coursework1Start3" name="coursework1Start3"><br>
+                <label for="coursework">End:</label><br>
+                <input class="moduleForm" type="date" id="coursework1End3" name="coursework1End3"><br>
+                <hr size="2" width="100%" color='grey'>
+            </div>
+            <!-- module 2 -->
+            <div class="module" id="module2">
+                    <label for="name">Module Name:</label><br>
+                    <input class="moduleForm" type="text" id="moduleName2" name="moduleName2"><br>
+                    <label for="code">Module Code:</label><br>
+                    <input class="moduleForm" type="text" id="moduleCode2" name="moduleCode2"><br>
+                    <label for="coursework">Year:</label><br>
+                    <input class="moduleForm" type="number" min="2022" max="2099" step="1" value="2022" id="moduleYear2"/><br>
+                    <label for="coursework">Semester:</label><br>
+                    <input class="moduleForm" type="number" min="1" max="2" step="1" value="1" id="moduleSemester2"/><br>
+                    <hr size="2" width="100%" color='grey'>   
+                    <!--coursework forms-->
+                    <!--1-->
+                    <label for="coursework">Assessment Name:</label><br>
+                    <input class="moduleForm" type="text" id="coursework2Name1" name="coursework2Name1"><br>
+    
+                    <label for="coursework">Assessment Type:</label><br>
+                    <select id="coursework2Type1" name="coursework2Type1">
+                        <option selected disabled>Select...</option>
+                        <option value="EXAM">Exam</option>
+                        <option value="COURSEWORK">Coursework</option>
+                        <option value="PRESENTATION">Presentation</option>
+                    </select><br> 
+                    <label for="coursework">Weighting (0 if formative):</label><br>
+                    <input class="moduleForm" type="number" min="0" max="100" step="1" value="0" id="coursework2Weighting1" name="coursework2Weighting1"><br>
+    
+                    <label for="coursework">Start:</label><br>
+                    <input class="moduleForm" type="date" id="coursework2Start1" name="coursework2Start1"><br>
+                    <label for="coursework">End:</label><br>
+                    <input class="moduleForm" type="date" id="coursework2End1" name="coursework2End1"><br>
+                    <hr size="2" width="100%" color='grey'> 
+                    <!--2-->
+                    <label for="coursework">Assessment Name:</label><br>
+                    <input class="moduleForm" type="text" id="coursework2Name2" name="coursework2Name2"><br>
+                    <label for="coursework">Assessment Type:</label><br>
+                    <select id="coursework2Type2" name="coursework2Type2">
+                        <option selected disabled>Select...</option>
+                        <option value="EXAM">Exam</option>
+                        <option value="COURSEWORK">Coursework</option>
+                        <option value="PRESENTATION">Presentation</option>
+                    </select><br> 
+                    <label for="coursework">Weighting (0 if formative):</label><br>
+                    <input class="moduleForm" type="number" min="0" max="100" step="1" value="0"id="coursework2Weighting2" name="coursework2Weighting2"><br>
+                    <label for="coursework">Start:</label><br>
+                    <input class="moduleForm" type="date" id="coursework2Start2" name="coursework2Start2"><br>
+                    
+                    <label for="coursework">End:</label><br>
+                    <input class="moduleForm" type="date" id="coursework2End2" name="coursework2End2"><br>
+                    <hr size="2" width="100%" color='grey'>
+                    <!--3-->
+                    <label for="coursework">Assessment Name:</label><br>
+                    <input class="moduleForm" type="text" id="coursework2Name3" name="coursework2Name3"><br>
+    
+                    <label for="coursework">Assessment Type:</label><br>
+                    <select id="coursework2Type3" name="coursework2Type3">
+                        <option selected disabled>Select...</option>
+                        <option value="EXAM">Exam</option>
+                        <option value="COURSEWORK">Coursework</option>
+                        <option value="PRESENTATION">Presentation</option>
+                    </select><br>  
+                    <label for="coursework">Weighting (0 if formative):</label><br>
+                    <input class="moduleForm" type="number" min="0" max="100" step="1" value="0"id="coursework2Weighting3" name="coursework2Weighting3"><br>
+                    <label for="coursework">Start:</label><br>
+                    <input class="moduleForm" type="date" id="coursework2Start3" name="coursework2Start3"><br>
+                    <label for="coursework">End:</label><br>
+                    <input class="moduleForm" type="date" id="coursework2End3" name="coursework2End3"><br>
+                    <hr size="2" width="100%" color='grey'>
+            </div>
+            <!-- module 3 -->
+            <div class="module" id="module3">
+                    <label for="name">Module Name:</label><br>
+                    <input class="moduleForm" type="text" id="moduleName3" name="moduleName3"><br>
+                    <label for="code">Module Code:</label><br>
+                    <input class="moduleForm" type="text" id="moduleCode3" name="moduleCode3"><br>
+                    <label for="coursework">Year:</label><br>
+                    <input class="moduleForm" type="number" min="2022" max="2099" step="1" value="2022" id="moduleYear3"/><br>
+                    <label for="coursework">Semester:</label><br>
+                    <input class="moduleForm" type="number" min="1" max="2" step="1" value="1" id="moduleSemester3"/><br>
+                    <hr size="2" width="100%" color='grey'>   
+                  
+                    <!--1-->
+                    <label for="coursework">Assessment Name:</label><br>
+                    <input class="moduleForm" type="text" id="coursework3Name1" name="coursework3Name1"><br>
+                    <label for="coursework">Assessment Type:</label><br>
+                    <select id="coursework3Type1" name="coursework3Type1">
+                        <option selected disabled>Select...</option>
+                        <option value="EXAM">Exam</option>
+                        <option value="COURSEWORK">Coursework</option>
+                        <option value="PRESENTATION">Presentation</option>
+                    </select><br> 
+                    <label for="coursework">Weighting (0 if formative):</label><br>
+                    <input class="moduleForm" type="number" min="0" max="100" step="1" value="0" id="coursework3Weighting1" name="coursework3Weighting1"><br>
+    
+                    <label for="coursework">Start:</label><br>
+                    <input class="moduleForm" type="date" id="coursework3Start1" name="coursework3Start1"><br>
+                    <label for="coursework">End:</label><br>
+                    <input class="moduleForm" type="date" id="coursework3End1" name="coursework3End1"><br>
+                    <hr size="2" width="100%" color='grey'> 
+                    <!--2-->
+                    <label for="coursework">Assessment Name:</label><br>
+                    <input class="moduleForm" type="text" id="coursework3Name2" name="coursework3Name2"><br>
+                    <label for="coursework">Assessment Type:</label><br>
+                    <select id="coursework3Type2" name="coursework3Type2">
+                        <option selected disabled>Select...</option>
+                        <option value="EXAM">Exam</option>
+                        <option value="COURSEWORK">Coursework</option>
+                        <option value="PRESENTATION">Presentation</option>
+                    </select><br> 
+                    <label for="coursework">Weighting (0 if formative):</label><br>
+                    <input class="moduleForm" type="number" min="0" max="100" step="1" value="0"id="coursework3Weighting2" name="coursework3Weighting2"><br>
+                    <label for="coursework">Start:</label><br>
+                    <input class="moduleForm" type="date" id="coursework3Start2" name="coursework3Start2"><br>
+                    <label for="coursework">End:</label><br>
+                    <input class="moduleForm" type="date" id="coursework3End2" name="coursework3End2"><br>
+                    <hr size="2" width="100%" color='grey'>
+                    <!--3-->
+                    <label for="coursework">Assessment Name:</label><br>
+                    <input class="moduleForm" type="text" id="coursework3Name3" name="coursework3Name3"><br>
+                    <label for="coursework">Assessment Type:</label><br>
+                    <select id="coursework3Type3" name="coursework3Type3">
+                        <option selected disabled>Select...</option>
+                        <option value="EXAM">Exam</option>
+                        <option value="COURSEWORK">Coursework</option>
+                        <option value="PRESENTATION">Presentation</option>
+                    </select><br>  
+                    <label for="coursework">Weighting (0 if formative):</label><br>
+                    <input class="moduleForm" type="number" min="0" max="100" step="1" value="0"id="coursework3Weighting3" name="coursework3Weighting3"><br>
+                    <label for="coursework">Start:</label><br>
+                    <input class="moduleForm" type="date" id="coursework3Start3" name="coursework3Start3"><br>
+                    <label for="coursework">End:</label><br>
+                    <input class="moduleForm" type="date" id="coursework3End3" name="coursework3End3"><br>
+                    <hr size="2" width="100%" color='grey'>   
+            </div> 
+            </div>
+        </form>
+            <button class="loginBtn" type="submit" form="moduleForm">Register</button>
+           
+        </div>
+        
+    <script src="scripts.js"></script>
+        
+        <footer>
+            <p>Norwich Research Park, Norwich NR4 7TJ, Norwich, England – ©University of East Anglia. All rights reserved​</p>
+        </footer>
+    </body>
+</html>

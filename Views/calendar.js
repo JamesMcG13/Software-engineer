@@ -173,7 +173,6 @@ function initButtons() {
         nav--;
         getapi(api_url);
     });
-    newEvent.addEventListener('click', () => openModal());
     document.getElementById('cancelButton').addEventListener('click', closeModal);
 }
 initButtons();

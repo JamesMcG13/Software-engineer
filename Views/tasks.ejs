@@ -25,6 +25,7 @@
                     <ul>
                         <li><a href="/">Home</a></li>
                         <li><a href="calendar">Calendar</a></li>
+                        <li><a href="tasks">Tasks</a></li>
                         <li><a href="fileupload">Profile Upload</a></li>
                         <li><a href="about">About</a></li>
                         <li><a href="help">Help</a></li>
@@ -36,7 +37,6 @@
                         <li>
                             <button id="colorBtn" class="darkMode" onclick="colourFunction()">Toggle Colour</button>
                         </li>
-                        <!--Added 3 images FELIX-->
                         <div id="social">
                             <div id="fb">
                                 <a href="https://facebook.com/ueaofficial/">
@@ -60,50 +60,24 @@
 		
 		</header>
        
-        
-        <div class="content-container">
-            <div class="containerCalendar">
-                <div id="headerCalendar">
-                    <div id = "monthDisplay"></div>
-                    <div>
-                    <button id="backButton"></button>
-                    <button id = "nextButton"></button>
-                </div>
-                </div>
-                <div id="weekdays">
-                    <div>Sunday</div>
-                    <div>Monday</div>
-                    <div>Tuesday</div>
-                    <div>Wednesday</div>
-                    <div>Thursday</div>
-                    <div>Friday</div>
-                    <div>Saturday</div>
-                </div>  
-                <div id="calendar"></div>
-            </div>
-
-            <div id ="newEventModal">
-                <form action="/saveEvent" method="POST">
-                    <h2>New Event</h2>
+     <div class="task-content-container">
+         <div class="task-form">
+         
+                <form action="/" method="POST">
                     
-                    <input class="eventForm" type="text" id="eventTitle" name="eventTitle">
-                    <input class="eventForm" type="time" id="eventStart" name="eventStart">
-                    <input class="eventForm" type="time" id="eventEnd" name="eventEnd">
-                    <button class="saveButton" type="submit">Save</button>
-    
-                    <button id="cancelButton">Cancel</button>
-                </form>    
-            </div>  
-            <div id="modalBackDrop"></div>
-            <div id="deleteEventModal">
-                <h2>Event</h2>
-                <p id="eventText"></p>
-                <button id="deleteButton">Delete</button>
-                <button id="closeButton">Close</button>
-            </div>
-            
-        </div>
-    <script src="calendar.js"></script>
+                    <label for="task">Task Name:</label>
+                    <input class="task-form-inputs" type="text" id="task" name="task"><br><br>
+                    <label for="module">Module:</label>
+                    <input class="task-form-inputs" type="text" id="module" name="module"><br><br>
+                    <label for="task_description">Description:</label>
+                    <input class="task-form-inputs" type="text" id="task_description" name="task_description"><br><br>
+
+                    <button class="task-button" type="submit">Create Task</button>
+                </form>
+        
+          </div>
+    </div>
+        
     <script src="scripts.js"></script>
         
         <footer>

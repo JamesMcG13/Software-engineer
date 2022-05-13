@@ -62,14 +62,13 @@
        
         <div class="content-container">
             <div class="upload-container">
-            <p>Upload your semester profile. It has been provided to you by the UEA hub.</p>
-        <form action="/uploadedPage">
-        <input type="file" id="myFile" name="filename">
-        <input class='loginBtn' type="submit">
-    </div>
-</form>
-
-        
+                <p>Upload your semester profile. 
+                It has been provided to you by the UEA hub in the form of a .json file.</p>
+                <form action="/uploadModule" method="POST" class="upload-container">
+                    <input type="file" id="uploadedFile" name="uploadedFile">
+                    <input class='loginBtn' type="submit">
+                </form> 
+            </div>
         </div>
         
     <script src="scripts.js"></script>
