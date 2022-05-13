@@ -155,9 +155,13 @@ function closeModal() {
 function openDeleteEventModal(eventDetails){
     var eventDeleteID = document.getElementById('eventID');
     eventDeleteID.innerText = eventDetails.eventID;
+
+    var eventTitle = document.getElementById('removeEventTitle');
+    eventTitle.innerText = `${eventDetails.Title}`;
     deleteEventModal.style.display = 'block';
 
 }
+
 
 
 function initButtons() {

@@ -102,8 +102,9 @@
             <!-- Delete event modal -->
             <div id="deleteEventModal">
                 <form action="/removeEvent" method="POST">
-                    <p id="eventTitle"></p>
+                    <p id="removeEventTitle"></p>
                     <p id="eventID"></p>
+                    <p id="Message">Please enter the number above and click delete if you'd like to delete the event</p>
                     <input class="eventForm" type="text" id="removeID" name="removeID">
                     <button id="deleteButton" type = "submit">Delete</button>
                     <button id="closeButton" type = "cancel">Close</button>
