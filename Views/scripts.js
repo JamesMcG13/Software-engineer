@@ -1,3 +1,25 @@
+var deads_url = './student-deadlines.json';
+
+async function getapi(url1) {
+  // Storing response
+  const response1 = await fetch(url1);
+  // Storing data in form of JSON
+  var deadlinesJson = await response1.json();
+  //console.log(data);
+  uploadRedirect(deadlinesJson);
+}
+
+function uploadRedirect(deadlinesJson){
+  if(deadlinesJson.length > 1){
+    document.getElementById('modulesButton').href = '/uploadPage';
+  }else{
+    document.getElementById('modulesButton').href = 'fileupload';
+  }
+}
+
+getapi(deads_url)
+
+
 mybutton = document.getElementById("scrollBtn");
 window.onscroll = function() {scroll()};
 
@@ -44,6 +66,5 @@ function colourFunction() {
   element.classList.toggle("darkMode");
   var footer = document.querySelector('footer')
   footer.classList.toggle("darkFooter")
-  
-
 }
+

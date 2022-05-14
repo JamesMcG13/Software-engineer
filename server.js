@@ -476,6 +476,10 @@ app.get('/calendar', (req, res) => {
   res.render('uploadedpage.ejs',{modules: modules});
  });
 
+ app.get('/uploadPage', (req, res) => {
+  res.render('uploadedpage.ejs',{modules: modules});
+ })
+
 //FELIX CALENDAR
 
 
