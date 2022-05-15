@@ -6,10 +6,68 @@
 html{
   scroll-behavior: smooth;
 }
+.tint{
+  background-color: rgba(0, 0, 0, 0.145); /* Tint color */
+  background-blend-mode: multiply;
+  position: fixed; /* keeps the screen covered durning scroll */
+  width: 100%;
+  height: 100%;
+z-index: 1000; /* puts it on top of everything */
+pointer-events: none; /* so we can click through it */
+}
+.backgrounds img {
+  
+  position: relative;
+  height: 100%;
+  width: 100%;
+  animation-name: fadeInOut;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite; 
+  animation-duration: 20s;
+  position:absolute;
+}
+#image-one {
+  animation-delay: 16s;
+}
+
+#image-two {
+  animation-delay: 12s;
+}
+
+#image-three {
+  animation-delay: 8s;
+}
+#image-four {
+  opacity: 1;
+  animation-delay: 2s;
+}
+@keyframes fadeInOut {
+  0% {
+    opacity:1;
+  }
+  17% {
+    opacity:1;
+  }
+  25% {
+    opacity:0;
+  }
+  92% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
 body{
-  background-color: #2468B8A1;
+  font-family: "Segoe UI";
+  background-color: #2468B8A1; 
+}
+.loginBody{
+  background-color: #2468B8A1; 
+  margin:0 !important;
 }
 footer {
+  z-index: 1001;
   line-height: 0.1vw;
   width:100%;
   background-color: #1b549680;
@@ -48,37 +106,34 @@ footer {
   margin-right:4vw;
   border-radius: 12px;
 }
+#help-image{
+  border-top: 4px solid #2468B8A1;
+  width: 100%;
+  height: auto;
+  margin-bottom: 2vw;
+}
 /* needs comment */
 #error{
   margin-top:10px;
   margin-left:30%;
 }
 .exactCenter {
-  width:300px;
-  height:300px;
+  display: grid;
+  z-index: 1001;
+  font-family: "Segoe UI";
+  width:340px;
+  height:530px;
   position: fixed;
-  background-color: #1b5496b9;
-  top: 45%;
-  left: 50%;
+  background-color: #363333ce;
+  top: 35%;
+  left: 48%;
   margin-top: -150px;
   margin-left: -150px;
-  padding:10px;
-  border-radius: 10px;
+  padding:20px;
   color: white;
-}
-.exactCenterReg{
-  width:300px;
-  height:500px;
-  position: fixed;
-  background-color: #1b5496b9;
-  top: 45%;
-  left: 50%;
-  margin-top: -150px;
-  margin-left: -150px;
-  padding:10px;
-
-  border-radius: 10px;
-  color: white;
+  /* center content */
+  text-align: left;
+  align-items: center;
 }
 
 /* start of header css */
@@ -96,19 +151,7 @@ footer {
   border-top-right-radius: 8px;
   border-bottom: 4px solid #92bee0;
 }
-.top-bar-login{
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #1b5496b9;
-  color: white;
-  text-align: left;
-  height: 12vw;
-  font-size: 1vw;
-  max-height: 5.7vw;
-  border-radius: 8px;
-  
-}
+
 #uea{
   margin-top:0.3vw;
   margin-right:31.4%;
@@ -192,7 +235,7 @@ footer {
 .loginForm{
   background-color:#92bee0 ;
   border: none;
-  width: 290px;
+  width: 95%;
   height:30px
 }
 
@@ -237,10 +280,10 @@ footer {
 }
 .loginBtn{
   padding: 8px;
-  margin-top: 20px;
+  margin-top: 30px;
   margin-left:35%;
-  width: 100px;
-  height: 50px;
+  width: 90px;
+  height: 40px;
   color: white;
   background-color: #92bee0;
   border: none;
@@ -301,35 +344,36 @@ footer {
 /* end upload page */
 
 /* calendar css */
-.nextButton, .backButton, .newEvent{
-  width: 75px;
-  cursor: pointer;
-  box-shadow: 0px 0px 2px gray;
-  border: none;
-  outline: none;
-  padding: 5px;
-  border-radius: 5px;
-  color: white;
-}
-#headerCalendar {
+
+#calendarDisplay {
   padding: 10px;
-  color: #d36c6c;
-  font-size: 26px;
-  font-family: sans-serif;
+  font:inherit;
   display: flex;
   justify-content: space-between;
 }
 
-#headerCalendar button {
-  background-color: #92a1d1;
+#monthYear{
+  color: #50a4e4;
+  font-size: 26px;
+  margin-left: 40%;
 }
 
-#containerCalendar {
-  width: 770px;
+#nextButton, #backButton, #newEvent{
+  width:30px;
+  height:30px;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+#nextButton img, #backButton img, #newEvent img{
+  width: 100%;
+  height: 100%;
+  background-color: white;
 }
 
 #weekdays {
   width: 100%;
+  font-weight: bold;
   display: flex;
   color: #247BA0;
 }
@@ -346,35 +390,30 @@ footer {
   flex-wrap: wrap;
 }
 
-#day,
-#currentDay {
-  width: 12%;
+#day, #today {
+  width: 12.5%;
   padding: 10px;
-  height: 100px;
+  height: 130px;
   cursor: pointer;
   box-sizing: border-box;
   background-color: white;
   margin: 5px;
-  box-shadow: 0px 0px 3px #CBD4C2;
+  box-shadow: 0px 0px 3px #2468B8A1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  color: #247BA0;
 }
 
 #calendar *:hover {
-  background-color: #e8faed;
+  background-color: #6999cfa1;
 }
 
-#calendar #day :hover {
-  background-color: #50a4e4;
+#calendar #day :hover, #calendar #today :hover {
+  background-color: #57aae9;
 }
 
-#calendar #currentDay :hover {
-  background-color: #50a4e4;
-}
-
-#currentDay {
-  background-color: #e8f4fa;
+#today {
+  background-color: #83bde9;
 }
 
 .event {
@@ -393,24 +432,14 @@ footer {
   display: flex;
 }
 
-.eventStart {
-
-  display: flex;
-}
-
-.eventDash {
-  display: flex;
-}
-
-.eventEnd {
-
+.eventStart, .eventDash, .eventEnd {
   display: flex;
 }
 
 .deadline {
   font-size: 10px;
   padding: 3px;
-  background-color: #7959ee;
+  background-color: #587de4;
   color: white;
   border-radius: 5px;
   max-height: 55px;
@@ -418,87 +447,84 @@ footer {
   display: flex;
 }
 
-.padding {
+.notDay {
   cursor: default !important;
   background-color: #FFFCFF !important;
   box-shadow: none !important;
 }
 
-#newEventModal,
-#deleteEventModal {
+#createCalendarMilestone,#deleteMilestone {
   display: none;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  font-family: "Segoe UI";
+  font-size: 1.5vw;
+  background-color: #363333ce;
+  color: white;
+  padding:1vw;
+  text-align: center;
+  align-items: center;
   z-index: 20;
-  padding: 25px;
-  background-color: #e8f4fa;
-  box-shadow: 0px 0px 3px black;
-  border-radius: 5px;
-  width: 350px;
-  top: 100px;
-  left: calc(50% - 175px);
-  position: absolute;
-  font-family: sans-serif;
 }
 
-#eventTitleInput {
+#milestoneTitle {
   padding: 10px;
-  width: 100%;
-  box-sizing: border-box;
-  margin-bottom: 25px;
+  width: 70%;
+  margin-bottom: 3px;
   border-radius: 3px;
   outline: none;
   border: none;
   box-shadow: 0px 0px 3px gray;
 }
-
-#eventStartInput {
+#milestoneDate{
+  text-align: center;
   padding: 10px;
-  width: 49%;
-  box-sizing: border-box;
-  margin-bottom: 25px;
+  width: 70%;
   border-radius: 3px;
+  margin-bottom: 3px;
   outline: none;
   border: none;
   box-shadow: 0px 0px 3px gray;
 }
 
-#eventEndInput {
+#milestoneStart, #milestoneEnd {
   padding: 10px;
-  width: 49%;
+  width: 35%;
   box-sizing: border-box;
-  margin-bottom: 25px;
+  margin-bottom: 3px;
   border-radius: 3px;
   outline: none;
   border: none;
   box-shadow: 0px 0px 3px gray;
 }
-
-#eventTitleInput.error {
-  border: 2px solid red;
+.saveButton, #cancelButton, #deleteMilestoneButton, #closeMilestoneButton{
+  padding: 10px;
+  margin-top: 4px;
+  width: 30%;
+  cursor: pointer;
+  float:left;
 }
-
-#cancelButton,
-#deleteButton {
+.saveButton{
+  margin-left:14%;
+  background-color: #85d69e;
+}
+#cancelButton{
+  margin-left: 12%;
   background-color: #d36c6c;
 }
 
-#saveButton,
-#closeButton {
-  background-color: #92a1d1;
+#deleteMilestoneButton{
+  margin-left: 14%;
+  background-color: #d36c6c;
 }
-
+#closeMilestoneButton{
+  margin-left: 12%;
+}
 #eventText {
-  font-size: 14px;
-}
-
-#modalBackDrop {
-  display: none;
-  top: 0px;
-  left: 0px;
-  z-index: 10;
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.8);
+  font-size: 12px;
 }
 /* end calendar */
 
@@ -593,32 +619,140 @@ footer {
 /* end dashboard */
 
 /*index css*/
-
-
 #milestones {
   display: none;
-  z-index: 20;
-  padding: 25px;
-  background-color: #e8f4fa;
-  box-shadow: 0px 0px 3px black;
-  border-radius: 5px;
-  width: 350px;
-  top: 100px;
-  left: calc(50% - 175px);
-  position: absolute;
-  font-family: sans-serif;
+   position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20%;
+  z-index: 1001;
+  font-family: "Segoe UI";
+  font-size: 1.5vw;
+  background-color: #363333ce;
+  color: white;
+  padding:1vw;
+  text-align: center;
+  align-items: center;
 }
-
+#milestones button{
+  margin-top: 10px;
+  background-color: #363333ce;
+  color: white;
+  padding: 1vw;
+  width:100px;
+  margin-top:15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1vw;
+  cursor: pointer;
+  outline: none;
+}
+#milestones input,select{
+  width: 100%;
+}
+#milestones #additionalNotes
+{
+  width: 100%;
+  height: 100px;
+  resize: none;
+  border-radius: 1px;
+}
 #redirect {
   display: none;
-  z-index: 20;
-  padding: 25px;
-  background-color: #e8f4fa;
-  box-shadow: 0px 0px 3px black;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  z-index: 1001;
+  font-family: "Segoe UI";
+  font-size: 1.5vw;
+  background-color: #363333ce;
+  color: white;
+  padding:1vw;
+  text-align: center;
+  align-items: center;
+}
+#redirect button{
+  background-color: #363333ce;
+  color: white;
+  padding: 1vw;
+  width:100px;
+  margin-top:15px;
+  border: none;
   border-radius: 5px;
-  width: 350px;
-  top: 100px;
-  left: calc(50% - 175px);
-  position: absolute;
-  font-family: sans-serif;
+  font-size: 1.5vw;
+  cursor: pointer;
+  outline: none;
+}
+#newMilestone{
+  margin-left: 45%;
+  background-color: #363333ce;
+  color: white;
+  padding:10px;
+  width:10vw;
+  margin-top:15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1vw;
+  cursor: pointer;
+  outline: none;
+}
+#missed-deadlines{
+  color: red;
+}
+#missed-deadlines,#upcoming-deadlines,#upcoming-activities{
+  padding-bottom:25px;
+  border-bottom: 4px solid #92bee0;
+}
+
+#gantt-chart{
+  margin-top:25px;
+  border-top: 4px solid #92bee0;
+}
+
+/* about page */
+#feedback-area{
+  margin-top: 10vw;
+  margin-left: 10vw;
+  margin-right: 10vw;
+  margin-bottom: 10vw;
+  background-color: #363333ce;
+  color: white;
+  padding:1vw;
+  text-align: center;
+  align-items: center;
+}
+#feedback-area textarea{
+  width: 100%;
+  height: 100px;
+  resize: none;
+  border-radius: 1px;
+}
+#feedback-area input{
+  background-color: #363333ce;
+  color: white;
+  padding: 1vw;
+  width:150px;
+  margin-top:15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.5vw;
+  cursor: pointer;
+  outline: none;
+}
+#feedback-confirmation{
+  margin-left: 45%;
+  background-color: #363333ce;
+  color: white;
+  padding:10px;
+  width:10vw;
+  margin-top:15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1vw;
+  cursor: pointer;
+  outline: none;
+  z-index: 20;
 }

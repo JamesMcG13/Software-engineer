@@ -62,11 +62,13 @@
 		</header>
        
         <div class="content-container">
-            
+            <div class="dashboard-container" id="upcoming-deadlines">
+                <h1><u>Study Dashboard</u></h1>
+            </div>
             <!-- to be hidden when no missed deadlines are active -->
             <div id="missed-deadlines" class="dashboard-container">
-                <h1><u>Study Dashboard</u></h1>
-                Missed deadlines:
+                <br>
+                <b>Missed deadlines:</b> <br>
                 These deadlines are beyond their hand-in date.
                 Please get in contact with your tutor about solving this issue.<br><br>
 
@@ -86,8 +88,13 @@
                       <td><%= upcoming_deadlines[i].end %></td>
                     </tr><br>
                  <% } %>
-                <h2>Activities left to do</h2>
+                
             </div>
+
+        <div id="upcoming-activities" class="dashboard-container">
+            <h2>Activities left to do</h2>
+        
+        </div>
             
             <% for(var i=0; i < activities.length; i++) { %>
                 <h3><%=activities[i].name%> - <%=activities[i].parent%></h3>
@@ -139,7 +146,7 @@
                     <label for="name">Milestone name</label><br>
                     <input type="text" id="milestoneName" name="milestoneName"><br><br>
     
-                    <label for="name">Activity</label><br>
+                    <label for="activity">Activity</label><br>
                     <select id="milestoneParent" name="milestoneParent">
                         <option selected disabled>Select...</option>
                         <% for(var i=0; i < activities.length; i++) { %>   
@@ -147,22 +154,24 @@
                          <% } %>
                     </select><br><br>
     
-                    <label for="name">Time (minutes):</label><br>
+                    <label for="time">Time (minutes):</label><br>
                     <input type="number" id="milestoneTime" name="milestoneTime"><br>
                     <br>
                     <label for="name">Additional notes:</label><br>
                     <input type="text" id="additionalNotes" name="additionalNotes"><br>
                 </form>
-                <button class="loginBtn" type="submit" form="createMilestone">Submit</button>
+                <button type="submit" form="createMilestone">Submit</button>
                 <button id="closeButton" type = "cancel">Close</button>
                
             </div>
-            <div id="redirect">
-                <P>You have not uploaded a file yet, would you like to open the file upload page?</P>
-                <button id="redirectButton"  onclick="window.location='fileupload';">Yes</button>
-                <button id="redirectCloseButton" type = "cancel">No</button>
-            </div>           
+    
+                     
         </div>
+        <div id="redirect" class="redirect">
+            <P>You have not uploaded a file yet, would you like to open the file upload page?</P>
+            <button id="redirectButton"  onclick="window.location='fileupload';">Yes</button><br>
+            <button id="redirectCloseButton" type = "cancel">No</button>
+        </div>  
         
     <script src="index.js"></script>
     <script src="scripts.js"></script>

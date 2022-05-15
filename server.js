@@ -12,7 +12,11 @@ const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
 const methodOverride = require('method-override')
+const expressValidator = require('express-validator');
+const expressSession = require('express-session');
+const bodyParser = require('body-parser');
 
+const urlencodedParser = bodyParser.urlencoded({extended : false});
 
 const initializePassport = require('./passport');
 const { json } = require('express/lib/response');
@@ -57,6 +61,9 @@ const users = [{
 //
 modules = []
 const currentUser=null
+
+//feedback array
+const feedback = []
 
 app.use(express.static(__dirname + '/Views'));
 app.use(express.urlencoded({
@@ -429,7 +436,7 @@ app.get('/help', (req, res) => {
 app.post('/milestones',checkAuthenticated, async (req, res) => {
   try { 
     
-    //const user = req.user
+    const user = req.user
 
     user.milestones.push({
       name : req.body.milestoneName,
@@ -491,10 +498,10 @@ app.post('/saveEvent', checkAuthenticated, async (req, res) => {
   try {
     user.events.push({
       eventID: user.events.length + 1,
-      eventDate: req.body.eventDate,
-      Title: req.body.eventTitle,
-      Start: req.body.eventStart,
-      End: req.body.eventEnd
+      eventDate: req.body.milestoneDate,
+      Title: req.body.milestoneTitle,
+      Start: req.body.milestoneStart,
+      End: req.body.milestoneEnd
     })
 
     //writing out updated array to json file
@@ -526,4 +533,20 @@ app.post('/removeEvent', checkAuthenticated, async (req, res) => {
   console.log(user.events)
 })
 
+app.use('/left-arrow.png', express.static('images//left-arrow.png'));
+app.use('/right-arrow.png', express.static('images//right-arrow.png'));
+app.use('/plus_symbol.png', express.static('images/plus_symbol.png'));
+
+
+//About page feedback form
+//Kept it anonymous by not associating the feedback array with users
+app.post('/feedback', checkAuthenticated, async (req, res) => {
+  try {
+    feedback.push(req.body.feedback);
+    console.log(feedback);
+  } catch (error) {
+    console.log(error);
+  }
+  res.redirect('/about');
+})
 

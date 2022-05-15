@@ -1,6 +1,6 @@
 var deads_url = './student-deadlines.json';
 
-async function getapi(url1) {
+async function getJson(url1) {
   // Storing response
   const response1 = await fetch(url1);
   // Storing data in form of JSON
@@ -17,7 +17,7 @@ function uploadRedirect(deadlinesJson){
   }
 }
 
-getapi(deads_url)
+getJson(deads_url)
 
 
 mybutton = document.getElementById("scrollBtn");

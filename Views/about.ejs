@@ -85,8 +85,27 @@
                 <p>  There are many other resources to help you with your studies on our <a href="https://my.uea.ac.uk/departments/learning-enhancement">website.</a></p>
                <p><b> Your comments or suggestions about our resources are very welcome.</b></p>
             </p>
+           
+            <div  id = "feedback-confirmation" role="alert">
+                <p>Thank you for your input, your feedback will be reviewed.</p>
+                <button id="closeFeedback">Close</button>
+            </div>
+            <div id="feedback-area">
+                <h2>Feedback</h2>
+                <p>
+                    Please provide any feedback you have on the website, or any issues you have with the website.
+                </p>
+                <form action="/feedback" method="POST">
+                    <textarea name="feedback" id="feedback" rows="10" cols="50" placeholder="Enter your feedback here"></textarea>
+                    <input id = "feedbackButton"  type="submit" value="Submit">
+                </form>
+            </div>
         </div>
-        
+
+       
+    </div>
+    
+    <script src="about.js"></script>
     <script src="scripts.js"></script>
         
         <footer>

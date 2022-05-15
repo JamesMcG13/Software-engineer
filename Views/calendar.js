@@ -2,12 +2,9 @@ let nav = 0;
 let clicked = null;
 
 const calendar = document.getElementById('calendar');
-const newEventModal = document.getElementById('newEventModal');
-const deleteEventModal = document.getElementById('deleteEventModal');
+const createCalendarMilestone = document.getElementById('createCalendarMilestone');
+const deleteMilestone = document.getElementById('deleteMilestone');
 const backDrop = document.getElementById('modalBackDrop');
-const eventTitleInput = document.getElementById('eventTitleInput');
-const eventStartInput = document.getElementById('eventStartInput');
-const eventEndInput = document.getElementById('eventEndInput');
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 const events_url = './student-events.json';
@@ -25,13 +22,12 @@ async function getapi(url,url1) {
     // Storing data in form of JSON
     var eventsJson = await response.json();
     var deadlinesJson = await response1.json();
-    //console.log(data);
     load(eventsJson,deadlinesJson);
 }
 
 //when click on a date
 function openModal() {
-    newEventModal.style.display = 'block';
+    createCalendarMilestone.style.display = 'block';
     backDrop.style.display = 'block';
 }
 
@@ -41,7 +37,6 @@ function load(eventsJson,deadlinesJson) {
         dt.setMonth(new Date().getMonth() + nav);
     }
 
-    console.log(deadlinesJson);
 
     const day = dt.getDate();
     const month = dt.getMonth();
@@ -59,7 +54,7 @@ function load(eventsJson,deadlinesJson) {
 
     const paddingDays = weekdays.indexOf(dateString.split(', ')[0]);
 
-    document.getElementById('monthDisplay').innerText = `${dt.toLocaleDateString('en-uk', { month: 'long' })} ${year}`;
+    document.getElementById('monthYear').innerText = `${dt.toLocaleDateString('en-uk', { month: 'long' })} ${year}`;
 
     calendar.innerHTML = '';
 
@@ -103,7 +98,6 @@ function load(eventsJson,deadlinesJson) {
                 for (var k = 0; k < deadlinesJson.length; k ++){
                     try {
                         if (dayString === deadlinesJson[k].end) {
-                            console.log("Got through" + dayString + "  " + k);
                             createDeadline(daySquare, deadlinesJson[k]);
                         }
                     } catch (error) {
@@ -112,17 +106,16 @@ function load(eventsJson,deadlinesJson) {
                 }
 
             if (i - paddingDays == day && nav == 0) {
-                daySquare.id = 'currentDay';
+                daySquare.id = 'today';
             }
         }
 
         } else {
-            daySquare.classList.add('padding');
+            daySquare.classList.add('notDay');
         }
         calendar.appendChild(daySquare);
     }
 
-    //console.log(paddingDays);
 }
 
 function createEvent(eventDay, eventDetails) {
@@ -150,7 +143,7 @@ function createEvent(eventDay, eventDetails) {
     eventDiv.appendChild(eventEnd);
 
     eventDiv.addEventListener('click',() => {
-        openDeleteEventModal(eventDetails);
+        openDeleteMilestone(eventDetails);
     });
 }
 
@@ -169,8 +162,8 @@ function createDeadline(deadlineDay, deadlineDetails){
 
 
 function closeModal() {
-    newEventModal.style.display = 'none';
-    deleteEventModal.style.display = 'none';
+    createCalendarMilestone.style.display = 'none';
+    deleteMilestone.style.display = 'none';
     backDrop.style.display = 'none';
     eventTitleInput.value = '';
     eventStartInput.value = '';
@@ -179,13 +172,13 @@ function closeModal() {
 }
 
 //need to make it so they can only delete event if eventDeleteID == eventID otherwise it will cancel any event of the id they put in
-function openDeleteEventModal(eventDetails){
+function openDeleteMilestone(eventDetails){
     var eventDeleteID = document.getElementById('eventID');
     eventDeleteID.innerText = eventDetails.eventID;
 
     var eventTitle = document.getElementById('removeEventTitle');
     eventTitle.innerText = `${eventDetails.Title}`;
-    deleteEventModal.style.display = 'block';
+    deleteMilestone.style.display = 'block';
 
 }
 

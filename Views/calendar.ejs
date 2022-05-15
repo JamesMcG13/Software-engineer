@@ -64,50 +64,55 @@
         
         <div class="content-container">
             <div class="containerCalendar">
-                <div id="headerCalendar">
-                    <div id = "monthDisplay"> </div>
+                <div id="calendarDisplay">
+                    <div id = "monthYear"> </div>
                     <div>
-                        <button id="newEvent">Add milestone</button>
-                        <button id="backButton">Previous</button>
-                        <button id = "nextButton">Next</button>
+                        <button id="newEvent">
+                            <img src = "/plus_symbol.png">
+                        </button>
+                        <button id="backButton">
+                            <img src = "/left-arrow.png">
+                        </button>
+                        <button id = "nextButton">
+                            <img src = "/right-arrow.png">
+                        </button>
                     </div>
                 </div>
                 </div>
                 <div id="weekdays">
-                    <div>Sunday</div>
-                    <div>Monday</div>
-                    <div>Tuesday</div>
-                    <div>Wednesday</div>
-                    <div>Thursday</div>
-                    <div>Friday</div>
-                    <div>Saturday</div>
+                    <div>Sun</div>
+                    <div>Mon</div>
+                    <div>Tue</div>
+                    <div>Wed</div>
+                    <div>Thur</div>
+                    <div>Fri</div>
+                    <div>Sat</div>
                 </div>  
                 <div id="calendar">
                 </div>
             </div>
 
-            <div id ="newEventModal">
+            <div id ="createCalendarMilestone">
                 <form action="/saveEvent" method="POST">
-                    <h2>New Event</h2>
+                    <h2>New Milestone</h2>
                     
-                    <input class="eventForm" type="text" id="eventTitle" name="eventTitle">
-                    <input class="eventForm" type="date" id="eventDate" name="eventDate">
-                    <input class="eventForm" type="time" id="eventStart" name="eventStart">
-                    <input class="eventForm" type="time" id="eventEnd" name="eventEnd">
+                    <input class="milestoneForm" type="text" id="milestoneTitle" name="milestoneTitle" placeholder="Title">
+                    <input class="milestoneForm" type="date" id="milestoneDate" name="milestoneDate">
+                    <input class="milestoneForm" type="time" id="milestoneStart" name="milestoneStart">
+                    <input class="milestoneForm" type="time" id="milestoneEnd" name="milestoneEnd">
                     <button class="saveButton" type="submit">Save</button>
                 </form>
                 <button id="cancelButton">Cancel</button>    
             </div>  
-            <div id="modalBackDrop"></div>
             <!-- Delete event modal -->
-            <div id="deleteEventModal">
+            <div id="deleteMilestone">
                 <form action="/removeEvent" method="POST">
                     <p id="removeEventTitle"></p>
                     <p id="eventID"></p>
                     <p id="Message">Please enter the number above and click delete if you'd like to delete the event</p>
-                    <input class="eventForm" type="text" id="removeID" name="removeID">
-                    <button id="deleteButton" type = "submit">Delete</button>
-                    <button id="closeButton" type = "cancel">Close</button>
+                    <input class="milestoneDeleteForm" type="text" id="removeID" name="removeID">
+                    <button id="deleteMilestoneButton" type = "submit">Delete</button>
+                    <button id="closeMilestoneButton" type = "cancel">Close</button>
             </form>
             </div>
             
