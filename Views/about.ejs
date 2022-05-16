@@ -1,96 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-    <meta charset="UTF-8">
-    <title>UEA Study Planner</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="planner_style.css">
-    <style>
-    </style>   
+<meta charset="UTF-8">
+<title>UEA Study Planner</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="planner_style.css">
+<style>
+</style>
 
-    <body>
-        <!-- scroll to top button -->
-        <button id="scrollBtn" title="Back to top" onclick="topFunction()">↑<br>Back to Top</button>
-    
-        <header> <!-- header contains both nav bar and logo  -->
-            <div class="top-bar">
-                    <img id="uea" src="https://i.imgur.com/G8W14Io.png">
-                    <h1>Student Study Planner</h1>
-                    <img id="logo" src="https://i.imgur.com/Bfrya3f.png">
-                </div>
+<body>
+    <!-- scroll to top button -->
+    <button id="scrollBtn" title="Back to top" onclick="topFunction()">↑<br>Back to Top</button>
 
-            </div>
-			
-			<div class="navigation-bar">
-                <div id="navigation-container">  
-                    <ul>
-                        <li><a href="/">Home</a></li>
-                        <li><a href="calendar">Calendar</a></li>
-                        <li><a href="fileupload">Profile Upload</a></li>
-                        <li><a href="about">About</a></li>
-                        <li><a href="help">Help</a></li>
-                      
-                        <li>
-                            <form action="/logout?_method=DELETE" method="POST">
-                                <button class= "logoutBtn" type="submit">Log Out</button>
-                            </form>
-                        </li>
-                        <li>
-                            <button id="colorBtn" class="darkMode" onclick="colourFunction()">Toggle Colour</button>
-                        </li>
-                        <!--Added 3 images FELIX-->
-                        <div id="social">
-                            <div id="fb">
-                                <a href="https://facebook.com/ueaofficial/">
-                                    <img id="socialImage" src="/facebook.png">
-                                </a>
-                            </div>
-                            <div id="ig">
-                                <a href="https://instagram.com/uniofeastanglia">
-                                    <img id="socialImage" src="/instagram.png">
-                                </a>
-                            </div>
-                            <div id="tt">
-                                <a href="https://twitter.com/uniofeastanglia">
-                                    <img id="socialImage" href="twitter" src="/twitter.png">
-                                </a>
-                            </div>
-                        </div>                        
-                    </ul>
-                </div>
-            </div>
-		
-		</header>
-       
-        <div class="content-container">
-            <h1>About</h1>
-       
-            <p>
-                <h2>
-                    Intended use
-                </h2>
-                The UEA study planner is meant to help students engage with their learning and planning for assesments.
-                <p>Once each student has uploaded their personalised file which has been provided by the hub, a visualised scheduling system along with all modules will be displayed in their home area. </p>
-                <!--Could have a photo of a example calendar to show what it would look like once a file has been uploaded-->
-                <p>From here, each student can use the website to plan and schedule tasks, based on their module schedule. These tasks
-                    can have dependencies and goals which can be visually tracked by each student. Tasks also have the abilities on being dependent on one another, 
-                meaning one task may not be able to be marked completed until another task has been completed.</p>
-                <h2>    
-                    Main Aims
-                </h2>
-                <p> To help students visualise their schedule and improve planning of tasks.</p>
-                <p> The ability to create, manipulate and create tasks, deadlines and milestones. Showing the percentage of completion on tasks.</p>
-                <p> To show statistics for tasks and milestones in gannt style representation, leading to better time management.</p>
-
-
-                <p>  There are many other resources to help you with your studies on our <a href="https://my.uea.ac.uk/departments/learning-enhancement">website.</a></p>
-               <p><b> Your comments or suggestions about our resources are very welcome.</b></p>
-            </p>
+    <header>
+        <!-- header contains both nav bar and logo  -->
+        <div class="top-bar">
+            <img id="uea" src="https://i.imgur.com/G8W14Io.png">
+            <h1>Student Study Planner</h1>
+            <img id="logo" src="https://i.imgur.com/Bfrya3f.png">
         </div>
-        
+
+        </div>
+
+        <div class="navigation-bar">
+            <div id="navigation-container">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="calendar">Calendar</a></li>
+                    <li><a id="modulesButton">Modules</a></li>
+                    <li><a href="about">About</a></li>
+                    <li><a href="help">Help</a></li>
+
+                    <li>
+                        <form action="/logout?_method=DELETE" method="POST">
+                            <button class="logoutBtn" type="submit">Log Out</button>
+                        </form>
+                    </li>
+                    <li>
+                        <button id="colorBtn" class="darkMode" onclick="colourFunction()">Toggle Colour</button>
+                    </li>
+                    <!--Added 3 images FELIX-->
+                    <div id="social">
+                        <div id="fb">
+                            <a href="https://facebook.com/ueaofficial/">
+                                <img id="socialImage" src="/facebook.png">
+                            </a>
+                        </div>
+                        <div id="ig">
+                            <a href="https://instagram.com/uniofeastanglia">
+                                <img id="socialImage" src="/instagram.png">
+                            </a>
+                        </div>
+                        <div id="tt">
+                            <a href="https://twitter.com/uniofeastanglia">
+                                <img id="socialImage" href="twitter" src="/twitter.png">
+                            </a>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+        </div>
+
+    </header>
+
+    <div class="content-container">
+        <h1>About</h1>
+
+        <p>
+        <h2>
+            Intended use
+        </h2>
+        The UEA study planner is meant to help students engage with their learning and planning for assesments.
+        <p>Once each student has uploaded their personalised file which has been provided by the hub, a visualised
+            scheduling system along with all modules will be displayed in their home area. </p>
+        <!--Could have a photo of a example calendar to show what it would look like once a file has been uploaded-->
+        <p>From here, each student can use the website to plan and schedule tasks, based on their module schedule. These
+            tasks
+            can have dependencies and goals which can be visually tracked by each student. Tasks also have the abilities
+            on being dependent on one another,
+            meaning one task may not be able to be marked completed until another task has been completed.</p>
+        <h2>
+            Main Aims
+        </h2>
+        <p> To help students visualise their schedule and improve planning of tasks.</p>
+        <p> The ability to create, manipulate and create tasks, deadlines and milestones. Showing the percentage of
+            completion on tasks.</p>
+        <p> To show statistics for tasks and milestones in gannt style representation, leading to better time
+            management.</p>
+
+
+        <p> There are many other resources to help you with your studies on our <a
+                href="https://my.uea.ac.uk/departments/learning-enhancement">website.</a></p>
+        <p><b> Your comments or suggestions about our resources are very welcome.</b></p>
+        </p>
+        <div id="feedback-area">
+            <h2>Feedback</h2>
+            <p>
+                Please provide any feedback you have on the website, or any issues you have with the website.
+            </p>
+            <form action="/feedback" method="POST">
+                <textarea name="feedback" id="feedback" rows="10" cols="50"
+                    placeholder="Enter your feedback here"></textarea>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+
+
+    </div>
+
     <script src="scripts.js"></script>
-        
-        <footer>
-            <p>Norwich Research Park, Norwich NR4 7TJ, Norwich, England – ©University of East Anglia. All rights reserved​</p>
-        </footer>
-    </body>
+
+    <footer>
+        <p>Norwich Research Park, Norwich NR4 7TJ, Norwich, England – ©University of East Anglia. All rights reserved​
+        </p>
+    </footer>
+</body>
+
 </html>

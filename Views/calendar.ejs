@@ -1,113 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
-    <meta charset="UTF-8">
-    <title>UEA Study Planner</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="planner_style.css">
-    <style>
-    </style>   
+<meta charset="UTF-8">
+<title>UEA Study Planner</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="planner_style.css">
+<style>
+</style>
 
-    <body>
-        <!-- scroll to top button -->
-        <button id="scrollBtn" title="Back to top" onclick="topFunction()">↑<br>Back to Top</button>
-    
-        <header> <!-- header contains both nav bar and logo  -->
-            <div class="top-bar">
-                    <img id="uea" src="https://i.imgur.com/G8W14Io.png">
-                    <h1>Student Study Planner</h1>
-                    <img id="logo" src="https://i.imgur.com/Bfrya3f.png​">
-                </div>
+<body>
+    <!-- scroll to top button -->
+    <button id="scrollBtn" title="Back to top" onclick="topFunction()">↑<br>Back to Top</button>
 
-            </div>
-			
-			<div class="navigation-bar">
-                <div id="navigation-container"> 
-                    <ul>
-                        <li><a href="/">Home</a></li>
-                        <li><a href="calendar">Calendar</a></li>
-                        <li><a href="fileupload">Profile Upload</a></li>
-                        <li><a href="about">About</a></li>
-                        <li><a href="help">Help</a></li>
-                        <li>
-                            <form action="/logout?_method=DELETE" method="POST">
-                                <button class= "logoutBtn" type="submit">Log Out</button>
-                            </form>
-                        </li>
-                        <li>
-                            <button id="colorBtn" class="darkMode" onclick="colourFunction()">Toggle Colour</button>
-                        </li>
-                        <!--Added 3 images FELIX-->
-                        <div id="social">
-                            <div id="fb">
-                                <a href="https://facebook.com/ueaofficial/">
-                                    <img id="socialImage" src="/facebook.png">
-                                </a>
-                            </div>
-                            <div id="ig">
-                                <a href="https://instagram.com/uniofeastanglia">
-                                    <img id="socialImage" src="/instagram.png">
-                                </a>
-                            </div>
-                            <div id="tt">
-                                <a href="https://twitter.com/uniofeastanglia">
-                                    <img id="socialImage" href="twitter" src="/twitter.png">
-                                </a>
-                            </div>
-                        </div>
-                    </ul>
-                </div>
-            </div>
-		
-		</header>
-       
-        
-        <div class="content-container">
-            <div class="containerCalendar">
-                <div id="headerCalendar">
-                    <div id = "monthDisplay"></div>
-                    <div>
-                    <button id="backButton"></button>
-                    <button id = "nextButton"></button>
-                </div>
-                </div>
-                <div id="weekdays">
-                    <div>Sunday</div>
-                    <div>Monday</div>
-                    <div>Tuesday</div>
-                    <div>Wednesday</div>
-                    <div>Thursday</div>
-                    <div>Friday</div>
-                    <div>Saturday</div>
-                </div>  
-                <div id="calendar"></div>
-            </div>
-
-            <div id ="newEventModal">
-                <form action="/saveEvent" method="POST">
-                    <h2>New Event</h2>
-                    
-                    <input class="eventForm" type="text" id="eventTitle" name="eventTitle">
-                    <input class="eventForm" type="time" id="eventStart" name="eventStart">
-                    <input class="eventForm" type="time" id="eventEnd" name="eventEnd">
-                    <button class="saveButton" type="submit">Save</button>
-    
-                    <button id="cancelButton">Cancel</button>
-                </form>    
-            </div>  
-            <div id="modalBackDrop"></div>
-            <div id="deleteEventModal">
-                <h2>Event</h2>
-                <p id="eventText"></p>
-                <button id="deleteButton">Delete</button>
-                <button id="closeButton">Close</button>
-            </div>
-            
+    <header>
+        <!-- header contains both nav bar and logo  -->
+        <div class="top-bar">
+            <img id="uea" src="https://i.imgur.com/G8W14Io.png">
+            <h1>Student Study Planner</h1>
+            <img id="logo" src="https://i.imgur.com/Bfrya3f.png​">
         </div>
+
+        </div>
+
+
+        <div class="navigation-bar">
+            <div id="navigation-container">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="calendar">Calendar</a></li>
+                    <li><a id="modulesButton">Modules</a></li>
+                    <li><a href="about">About</a></li>
+                    <li><a href="help">Help</a></li>
+                    <li>
+                        <form action="/logout?_method=DELETE" method="POST">
+                            <button class="logoutBtn" type="submit">Log Out</button>
+                        </form>
+                    </li>
+                    <li>
+                        <button id="colorBtn" class="darkMode" onclick="colourFunction()">Toggle Colour</button>
+                    </li>
+                    <!--Added 3 images FELIX-->
+                    <div id="social">
+                        <div id="fb">
+                            <a href="https://facebook.com/ueaofficial/">
+                                <img id="socialImage" src="/facebook.png">
+                            </a>
+                        </div>
+                        <div id="ig">
+                            <a href="https://instagram.com/uniofeastanglia">
+                                <img id="socialImage" src="/instagram.png">
+                            </a>
+                        </div>
+                        <div id="tt">
+                            <a href="https://twitter.com/uniofeastanglia">
+                                <img id="socialImage" href="twitter" src="/twitter.png">
+                            </a>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+        </div>
+
+    </header>
+
+
+    <div class="content-container">
+        <div class="containerCalendar">
+            <div id="calendarDisplay">
+                <div id="monthYear">
+                    <!-- date generated here by calendar.js -->
+                </div>
+                <div class="calendarDisplay-buttons">
+                    <button id="newEvent" class="tooltip">
+                        <span class="tooltip-text">
+                            Add new event
+                        </span>
+                    </button>
+                    <button id="backButton" class="tooltip">
+                        <span class="tooltip-text">
+                            Back
+                        </span>
+                    </button>
+                    <button id="nextButton" class="tooltip">
+                        <span class="tooltip-text">
+                            Next
+                        </span>
+                    </button>
+
+                    <div id="error">
+                        <% if(typeof alert !='undefined' ) { %>
+                            <% alert.forEach(function(error) { %>
+
+                                <div class="error">
+                                    <span class="closebtn"
+                                        onclick="this.parentElement.style.display='none';">&times;</span>
+                                    <%= error.msg %>
+                                </div>
+
+                                <% }) %>
+                                    <% } %>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div id="weekdays">
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thur</div>
+            <div>Fri</div>
+            <div>Sat</div>
+        </div>
+        <div id="calendar">
+        </div>
+    </div>
+
+    <div id="createCalendarMilestone">
+        <form action="/saveEvent" method="POST">
+            <h2>New Milestone</h2>
+
+            <input class="milestoneForm" type="text" id="milestoneTitle" name="milestoneTitle" placeholder="Title">
+            <input class="milestoneForm" type="date" id="milestoneDate" name="milestoneDate">
+            <input class="milestoneForm" type="time" id="milestoneStart" name="milestoneStart">
+            <input class="milestoneForm" type="time" id="milestoneEnd" name="milestoneEnd">
+            <button class="saveButton" type="submit">Save</button>
+        </form>
+        <button id="cancelButton">Cancel</button>
+    </div>
+    <!-- delete event -->
+    <div id="deleteMilestone">
+        <form action="/removeEvent" method="POST">
+
+            <p id="Message">You are trying to delete the following event:</p>
+            <p id="removeEventTitle"></p>
+            <p id="Message">To confirm, enter the number below into the form:</p>
+            <p id="eventID"></p>
+            <input class="milestoneDeleteForm" type="text" id="removeID" name="removeID">
+            <button id="deleteMilestoneButton" type="submit">Delete</button>
+            <button id="closeMilestoneButton" type="cancel">Cancel</button>
+        </form>
+    </div>
+
+    </div>
     <script src="./calendar.js"></script>
     <script src="scripts.js"></script>
-        
-        <footer>
-            <p>Norwich Research Park, Norwich NR4 7TJ, Norwich, England – ©University of East Anglia. All rights reserved​</p>
-        </footer>
-    </body>
+
+    <footer>
+        <p>Norwich Research Park, Norwich NR4 7TJ, Norwich, England – ©University of East Anglia. All rights reserved​
+        </p>
+    </footer>
+</body>
+
 </html>

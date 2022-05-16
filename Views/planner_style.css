@@ -1,28 +1,192 @@
-body{
+/* general css/whole site styling */
+
+.cw1 {
+  visibility: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.tint {
+  background-color: rgba(0, 0, 0, 0.145);
+  /* Tint color */
+  background-blend-mode: multiply;
+  position: fixed;
+  /* keeps the screen covered durning scroll */
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  /* puts it on top of everything */
+  pointer-events: none;
+  /* so we can click through it */
+}
+
+.backgrounds img {
+
+  position: relative;
+  height: 100%;
+  width: 100%;
+  animation-name: fadeInOut;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-duration: 20s;
+  position: absolute;
+}
+
+#image-one {
+  animation-delay: 16s;
+}
+
+#image-two {
+  animation-delay: 12s;
+}
+
+#image-three {
+  animation-delay: 8s;
+}
+
+#image-four {
+  opacity: 1;
+  animation-delay: 2s;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 1;
+  }
+
+  17% {
+    opacity: 1;
+  }
+
+  25% {
+    opacity: 0;
+  }
+
+  92% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+body {
+  font-family: "Segoe UI";
   background-color: #2468B8A1;
 }
 
-#colorBtn{
-  font:inherit;
-  display: block;
+.loginBody {
+  background-color: #2468B8A1;
+  margin: 0 !important;
+}
+
+footer {
+  z-index: 1001;
+  line-height: 0.1vw;
+  width: 100%;
+  background-color: #1b549680;
   color: white;
+  font-size: 0.9vw;
   text-align: center;
-  padding: 14px 16px;
-  background-color:inherit;
-  border:none;
-  outline:none;
+  position: fixed;
+  height: 1.6vw;
+  bottom: 0;
+  left: 0;
 }
-#colorBtn:hover{
-  background-color:#92bee0;
+
+.flex-row-container {
+  padding-top: 3vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
-.darkMode{
+
+.flex-row-container>div {
+  font-size: 1vw;
+  margin-right: 2vw;
+}
+
+.darkMode {
   background-color: rgba(0, 0, 0, 0.959);
 }
-.darkFooter{
+
+.darkFooter {
   background-color: rgba(0, 0, 0, 0.479);
 }
 
-.top-bar{
+.content-container {
+  padding: 1vw;
+  background-color: white;
+  width: auto;
+  height: auto;
+  margin-bottom: 20vw;
+  margin-left: 4vw;
+  margin-right: 4vw;
+  border-radius: 12px;
+}
+
+.coursework-container {
+  text-align: center;
+  border-radius: 10px;
+  margin: 0 auto;
+  width: 40%;
+  /* add wanted width */
+  background-color: #2468B8A1;
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  line-height: 2vw;
+  padding-bottom: 30px;
+}
+
+#help-image {
+  border-top: 4px solid #2468B8A1;
+  width: 100%;
+  height: auto;
+  margin-bottom: 2vw;
+}
+
+/* needs comment */
+#error {
+  margin-top: 10px;
+  margin-left: 30%;
+}
+
+.exactCenter {
+  display: grid;
+  z-index: 1001;
+  font-family: "Segoe UI";
+  width: 340px;
+  height: 530px;
+  position: fixed;
+  background-color: #363333ce;
+  top: 35%;
+  left: 48%;
+  margin-top: -150px;
+  margin-left: -150px;
+  padding: 20px;
+  color: white;
+  /* center content */
+  text-align: left;
+  align-items: center;
+}
+
+@media screen and (max-width: 650px) {
+  footer {
+    height: 4vw;
+  }
+
+  footer p {
+    font-size: 10px;
+  }
+}
+
+
+/* start of header css */
+.top-bar {
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -36,75 +200,62 @@ body{
   border-top-right-radius: 8px;
   border-bottom: 4px solid #92bee0;
 }
-/* different design for login page */
-.top-bar-login{
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #1b5496b9;
-  color: white;
-  text-align: left;
-  height: 12vw;
-  font-size: 1vw;
-  max-height: 5.7vw;
-  border-radius: 8px;
-  
-}
-#uea{
-  margin-top:0.3vw;
-  margin-right:31.4%;
+
+#uea {
+  margin-top: 0.3vw;
+  margin-right: 31.4%;
   width: 9vw;
   height: 4.5vw;
   float: left;
   min-height: 30px;
   min-width: 60px;
   position: relative;
-  
+
 }
-#logo{
-  top:-7.5vw;
+
+#logo {
+  top: -7.5vw;
   width: 10vw;
   height: 10.5vw;
   min-height: 30px;
   min-width: 60px;
-  float:right;
-  left:1.3vw;
+  float: right;
+  left: 1.3vw;
   position: relative;
   margin: 0 auto;
 }
-/*FELIX*/
+
 #social {
   background-color: #1b549680;
 }
+
 #social div:hover {
   outline: 1px white;
 }
-#social div{
+
+#social div {
   padding: none;
-  
+
 }
-#fb {
-  float: right;
-  background-repeat: no-repeat;
-}
-#ig {
-  float: right;
-  background-repeat: no-repeat;
-}
+
+#fb,
+#ig,
 #tt {
   float: right;
   background-repeat: no-repeat;
 }
 
 #socialImage {
-  max-width:45px;
-  max-height:45px;
+  max-width: 45px;
+  max-height: 45px;
   float: right;
   border-radius: 20px;
 }
-.navigation-bar{
+
+.navigation-bar {
   margin-bottom: 5vw;
 }
+
 .navigation-bar ul {
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
@@ -114,9 +265,11 @@ body{
   overflow: hidden;
   background-color: #1b5496b9;
 }
+
 .navigation-bar li {
   float: left;
 }
+
 .navigation-bar li a {
   display: block;
   color: white;
@@ -124,194 +277,297 @@ body{
   padding: 14px 16px;
   text-decoration: none;
 }
+
 .navigation-bar li a:hover {
   background-color: #92bee0;
 }
 
-.content-container{
-  padding: 1vw;
-  background-color: white;
-  width: auto;
-  height: auto;
-  margin-bottom: 20vw;
-  margin-left:4vw;
-  margin-right:4vw;
-  border-radius: 12px;
-}
-/* new */
-#error{
-  margin-top:10px;
-  margin-left:30%;
-}
-/* changed */
-.exactCenter {
-  width:300px;
-  height:300px;
-  position: fixed;
-  background-color: #1b5496b9;
-  top: 45%;
-  left: 50%;
-  margin-top: -150px;
-  margin-left: -150px;
-  padding:10px;
-  border-radius: 10px;
-  color: white;
-}
-/* new */
-.exactCenterReg{
-  width:300px;
-  height:500px;
-  position: fixed;
-  background-color: #1b5496b9;
-  top: 45%;
-  left: 50%;
-  margin-top: -150px;
-  margin-left: -150px;
-  padding:10px;
+/* end of header css */
 
-  border-radius: 10px;
-  color: white;
-}
-/* new */
-.loginForm{
-  background-color:#92bee0 ;
-  border: none;
-  width: 290px;
-  height:30px
-}
-/* new */
-.loginForm:focus,input:focus{
-  outline: none;
-}
-/* new */
-.loginBtn{
-  padding: 8px;
-  margin-top: 20px;
-  margin-left:35%;
-  width: 100px;
-  height: 50px;
-  color: white;
+/* login page */
+.loginForm {
   background-color: #92bee0;
   border: none;
+  width: 95%;
+  height: 30px
 }
-/* new */
-.loginBtn:hover{
-  background-color: #50a4e4;
+
+.loginForm:focus,
+input:focus {
+  outline: none;
 }
-/* new */
-.logoutBtn{
-  font:inherit;
+
+/* end login page */
+
+/* button css */
+.module-button {
+  display: flex;
+  width: 80vw !important;
+  background-image: url(https://i.imgur.com/JkAT1kv.png);
+  background-color: #2468B8A1;
+  background-repeat: no-repeat;
+  background-size: 51.8%;
+  background-position: right;
+  border: white;
+  color: white;
+  font-size: 1.3vw;
+  margin: 1vw;
+  cursor: pointer;
+  border-radius: 10px;
+  height: 100px;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.module-button:hover {
+  background-color: #92bee0;
+  color: white;
+}
+
+#module2Btn {
+  background-image: url(https://i.imgur.com/FMRfF6v.png)
+}
+
+#module3Btn {
+  background-image: url(https://i.imgur.com/I9ODd4P.png)
+}
+
+#colorBtn {
+  cursor: pointer;
+  font: inherit;
   display: block;
   color: white;
   text-align: center;
   padding: 14px 16px;
-  background-color:inherit;
-  border:none;
-  outline:none;
-}
-.logoutBtn:hover{
-  background-color:#92bee0;
-}
-.upload-container{
-  display:grid;
-  justify-content: center;
-}
-#scrollBtn {
-  display: none; /*default is hidden, modified by js function*/
-  cursor: pointer; 
-  position: fixed; 
-  bottom: 1.9vw; 
-  left:50%;
-  border: none; 
-  background-color: rgba(0, 0, 0, 0.479);
-  color: white; 
-  padding:6px;
-  border-radius: 10px; 
-  font-size: 10px; 
-}
-#scrollBtn:hover {
-  /* become more visible on hover */
-  background-color: rgb(0, 0, 0);  
-}
-
-footer {
-  line-height: 0.1vw;
-  width:100%;
-  background-color: #1b549680;
-  color:white;
-  font-size: 0.9vw;
-  text-align: center;
-  position: fixed;
-  height: 1.6vw;
-  bottom: 0;
-  left:0;
-}
-
-
-/*CALENDAR*/
-
-button {
-  width: 75px;
-  cursor: pointer;
-  box-shadow: 0px 0px 2px gray;
+  background-color: inherit;
   border: none;
   outline: none;
-  padding: 5px;
-  border-radius: 5px;
-  color: white;
 }
 
-#headerCalendar {
-  padding: 10px;
-  color: #d36c6c;
-  font-size: 26px;
-  font-family: sans-serif;
+#colorBtn:hover {
+  background-color: #92bee0;
+}
+
+.loginBtn {
+  padding: 8px;
+  margin-top: 30px;
+  margin-left: 35%;
+  width: 90px;
+  height: 40px;
+  color: white;
+  background-color: #92bee0;
+  border: none;
+  cursor: pointer;
+}
+
+.loginBtn:hover {
+  background-color: #50a4e4;
+}
+
+.logoutBtn {
+  cursor: pointer;
+  font: inherit;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  background-color: inherit;
+  border: none;
+  outline: none;
+}
+
+.logoutBtn:hover {
+  background-color: #92bee0;
+}
+
+.uploadBtn {
+  height: 35px;
+  color: white;
+  background-color: #92bee0;
+  border: none;
+  cursor: pointer;
+}
+
+#scrollBtn {
+  display: none;
+  /*default is hidden, modified by js function*/
+  cursor: pointer;
+  position: fixed;
+  bottom: 1.9vw;
+  left: 48%;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.479);
+  color: white;
+  padding: 6px;
+  border-radius: 10px;
+  font-size: 10px;
+}
+
+#scrollBtn:hover {
+  /* become more visible on hover */
+  background-color: rgb(0, 0, 0);
+}
+
+/* end buttons */
+
+/* upload page css */
+
+input[type="file"] {
+  display: none;
+}
+
+.styled-upload {
+  margin-top: 4 0px;
+  height: 200px;
+  width: 200px;
+  border: 4px #50a4e4;
+  ;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 4px solid #FFFFFF;
+  overflow: hidden;
+  cursor: pointer;
+  background-image: url(https://i.imgur.com/3ko3f29.png);
+  background-size: cover;
+  background-blend-mode: multiply;
+}
+
+.upload-container {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+}
+
+.upload-container p {
+  text-align: left;
+  font-size: 1.5vw;
+}
+
+#uploadedFile {
+  margin-left: 10%;
+  padding: 50px;
+}
+
+/* end upload page */
+
+/* calendar css */
+
+#calendarDisplay {
+  font: inherit;
   display: flex;
   justify-content: space-between;
 }
-#headerCalendar button {
-  background-color:#92a1d1;
+
+#monthYear {
+  color: #50a4e4;
+  font-size: 35px;
+  margin-left: 5px;
 }
-#containerCalendar {
-  width: 770px;
+
+.tooltip {
+  position: relative;
 }
+
+.tooltip .tooltip-text {
+  visibility: hidden;
+  position: absolute;
+  text-align: center;
+  color: white;
+  background-color: #2468B8A1;
+  opacity: 0;
+  padding: 10px;
+  border-radius: 10px;
+  width: 100px;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -59px;
+  margin-bottom: 5px;
+  transition: opacity 1s;
+
+}
+
+.tooltip:hover .tooltip-text {
+  opacity: 1;
+  visibility: visible;
+}
+
+.calendarDisplay-buttons button {
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+#newEvent {
+  background-image: url(https://i.imgur.com/TQopbh3.png);
+  background-size: cover;
+}
+
+#backButton {
+  background-image: url(https://i.imgur.com/chQGQK7.png);
+  background-size: cover;
+}
+
+#nextButton {
+  background-image: url(https://i.imgur.com/tGtbGWq.png);
+  background-size: cover;
+}
+
 #weekdays {
-  width: 100%;
+  width: 99%;
+  font-weight: bold;
   display: flex;
   color: #247BA0;
 }
+
 #weekdays div {
   width: 12%;
   padding: 10px;
 }
+
 #calendar {
   width: 100%;
   margin: auto;
   display: flex;
   flex-wrap: wrap;
 }
-.day {
-  width: 12%;
+
+#day,
+#today {
+  width: 12.5%;
   padding: 10px;
-  height: 100px;
+  height: 130px;
   cursor: pointer;
   box-sizing: border-box;
   background-color: white;
   margin: 5px;
-  box-shadow: 0px 0px 3px #CBD4C2;
+  box-shadow: 0px 0px 3px #2468B8A1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-}
-.day:hover {
-  background-color: #e8faed;
+  color: #247BA0;
 }
 
-.day + #currentDay {
-  background-color:#e8f4fa;
+#calendar *:hover {
+  transition: 0.7s;
+  background-color: #6999cfa1;
 }
+
+#calendar #day :hover,
+#calendar #today :hover {
+  background-color: #57aae9;
+}
+
+#today {
+  background-color: #6999cfa1;
+}
+
 .event {
-  font-size: 10px;
+  font-size: 12px;
   padding: 3px;
   background-color: #58bae4;
   color: white;
@@ -320,27 +576,211 @@ button {
   overflow: hidden;
   display: flex;
 }
-.eventTitle{
+
+.eventTitle {
   width: 60%;
-  display:flex;
-}
-.eventStart{
-  
-  display:flex;
-}
-.eventDash{
   display: flex;
 }
-.eventEnd{
-  
-  display:flex;
+
+.eventStart,
+.eventDash,
+.eventEnd {
+  display: flex;
 }
-.padding {
+
+.deadline {
+  margin-bottom: 5px;
+  font-size: 10px;
+  padding: 3px;
+  background-color: #587de4;
+  color: white;
+  border-radius: 5px;
+  max-height: 55px;
+  overflow: hidden;
+  display: flex;
+}
+
+.notDay {
   cursor: default !important;
   background-color: #FFFCFF !important;
   box-shadow: none !important;
 }
-#newEventModal, #deleteEventModal {
+
+#createCalendarMilestone,
+#deleteMilestone {
+  display: none;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  font-family: "Segoe UI";
+  font-size: 1.5vw;
+  background-color: #363333ce;
+  color: white;
+  padding: 1vw;
+  text-align: center;
+  align-items: center;
+  z-index: 20;
+}
+
+.milestoneDeleteForm {
+  padding: 10px;
+  width: 70%;
+  margin-bottom: 25px;
+  border-radius: 3px;
+  outline: none;
+  border: none;
+  box-shadow: 0px 0px 3px grey;
+}
+
+#milestoneTitle {
+  padding: 10px;
+  width: 70%;
+  margin-bottom: 25px;
+  border-radius: 3px;
+  outline: none;
+  border: none;
+  box-shadow: 0px 0px 3px gray;
+}
+
+#milestoneDate {
+  margin-bottom: 25px;
+  padding: 10px;
+  width: 70%;
+  border-radius: 3px;
+  outline: none;
+  border: none;
+  box-shadow: 0px 0px 3px gray;
+}
+
+#milestoneStart,
+#milestoneEnd {
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 37%;
+  box-sizing: border-box;
+  border-radius: 3px;
+  outline: none;
+  border: none;
+  box-shadow: 0px 0px 3px gray;
+}
+
+.saveButton,
+#cancelButton,
+#deleteMilestoneButton,
+#closeMilestoneButton {
+  padding: 10px;
+  margin-top: 25px;
+  width: 150px;
+  cursor: pointer;
+  border: none;
+  background-color: #363333ce;
+  color: white;
+}
+
+#eventID {
+  font-size: 25px;
+  color: red;
+}
+
+#eventText {
+  font-size: 12px;
+}
+
+@media screen and (max-width: 640px) {
+  #day {
+    width: 12%;
+  }
+}
+
+/* end calendar */
+
+/* dashboard css */
+
+.dashboard-container {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+  font-size: 1vw;
+}
+
+.prog-bar {
+  margin-top: 1vw;
+  margin-bottom: 1vw;
+  padding: 5px;
+  height: 15px;
+
+}
+
+.prog-bar-background {
+  background-color: lightgray;
+}
+
+#prog-bar-green {
+  background-color: green;
+  width: 45%;
+}
+
+#prog-bar-yellow {
+  background-color: yellow;
+  width: 30%;
+}
+
+#prog-bar-red {
+  background-color: red;
+  width: 15%;
+}
+
+/* gantt chart stuff */
+.chart-wrapper {
+  max-width: 1150px;
+  padding: 0 10px;
+  margin: 0 auto;
+}
+
+.chart-wrapper .chart-values {
+  position: relative;
+  display: flex;
+  margin-bottom: 20px;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.chart-wrapper .chart-values li {
+  flex: 1;
+  min-width: 80px;
+  text-align: center;
+}
+
+.chart-wrapper .chart-values li:not(:last-child) {
+  position: relative;
+}
+
+.chart-wrapper .chart-values li:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  height: 510px;
+  border-right: 1px solid var(--divider);
+}
+
+
+.chart-wrapper .chart-bars li {
+  position: relative;
+  color: var(--white);
+  margin-bottom: 15px;
+  font-size: 16px;
+  border-radius: 20px;
+  padding: 10px 20px;
+  width: 0;
+  opacity: 0;
+  transition: all 0.65s linear 0.2s;
+}
+
+#ganttTasks {
   display: none;
   z-index: 20;
   padding: 25px;
@@ -353,58 +793,194 @@ button {
   position: absolute;
   font-family: sans-serif;
 }
-#eventTitleInput {
-  padding: 10px;
-  width: 100%;
-  box-sizing: border-box;
-  margin-bottom: 25px;
-  border-radius: 3px;
-  outline: none;
-  border: none;
-  box-shadow: 0px 0px 3px gray;
+
+@media screen and (max-width: 600px) {
+  .chart-wrapper .chart-bars li {
+    padding: 10px;
+  }
 }
 
-#eventStartInput {
-  padding: 10px;
-  width: 49%;
-  box-sizing: border-box;
-  margin-bottom: 25px;
-  border-radius: 3px;
-  outline: none;
-  border: none;
-  box-shadow: 0px 0px 3px gray;
-}
+/* gantt chart end */
+/* end dashboard */
 
-#eventEndInput {
-  padding: 10px;
-  width: 49%;
-  box-sizing: border-box;
-  margin-bottom: 25px;
-  border-radius: 3px;
-  outline: none;
-  border: none;
-  box-shadow: 0px 0px 3px gray;
-}
-
-#eventTitleInput.error {
-  border: 2px solid red;
-}
-#cancelButton, #deleteButton {
-  background-color: #d36c6c;
-}
-#saveButton, #closeButton {
-  background-color: #92a1d1;
-}
-#eventText {
-  font-size: 14px;
-}
-#modalBackDrop {
+/*index css*/
+#milestones,
+#newActivity,
+#ganttTasks {
   display: none;
-  top: 0px;
-  left: 0px;
-  z-index: 10;
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  background-color: rgba(0,0,0,0.8);
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20%;
+  z-index: 1001;
+  font-family: "Segoe UI";
+  font-size: 1.5vw;
+  background-color: #363333ce;
+  color: white;
+  padding: 1vw;
+  text-align: center;
+  align-items: center;
+}
+
+#milestones button,
+#newActivity button,
+#ganttTasks button {
+  margin-top: 10px;
+  background-color: #363333ce;
+  color: white;
+  padding: 1vw;
+  width: 120px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1vw;
+  cursor: pointer;
+  outline: none;
+}
+
+#milestones input,
+select,
+#newActivity input,
+select,
+#ganttTasks input,
+select {
+  width: 100%;
+}
+
+#milestones #additionalNotes {
+  width: 100%;
+  height: 100px;
+  resize: none;
+  border-radius: 1px;
+}
+
+#redirect {
+  display: none;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  z-index: 1001;
+  font-family: "Segoe UI";
+  font-size: 1.5vw;
+  background-color: #363333ce;
+  color: white;
+  padding: 1vw;
+  text-align: center;
+  align-items: center;
+}
+
+#redirect button {
+  background-color: #363333ce;
+  color: white;
+  padding: 1vw;
+  width: 100px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.5vw;
+  cursor: pointer;
+  outline: none;
+}
+
+#newMilestone,
+#newActivityButton,
+#newGanttTask {
+  margin-left: 45%;
+  background-color: #363333ce;
+  color: white;
+  padding: 10px;
+  width: 10vw;
+  margin-top: 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1vw;
+  cursor: pointer;
+  outline: none;
+}
+
+#newActivityButton {
+  margin-left: 15%;
+}
+
+#missed-deadlines {
+  color: red;
+}
+
+#missed-deadlines,
+#upcoming-deadlines {
+  padding-bottom: 25px;
+  border-bottom: 4px solid #92bee0;
+}
+
+#gantt-chart {
+  margin-top: 25px;
+  border-top: 4px solid #92bee0;
+}
+
+@media screen and (max-width: 650px) {
+  #redirect {
+    top: 20%;
+    left: 48%;
+    width: 40%;
+    height: 15%;
+    font-size: 15px;
+  }
+
+  #redirect button {
+    font-size: 3vw;
+    width: 150px;
+    height: 30px;
+  }
+
+  #newMilestone,
+  #newActivityButton {
+    width: 20vw;
+    height: 10vw;
+    font-size: 2.5vw;
+  }
+
+  #newMilestone {
+    margin-left: 38.5%;
+  }
+
+  #newActivityButton {
+    margin-left: 0;
+  }
+}
+
+
+/* about page */
+#feedback-area {
+  margin-top: 10vw;
+  margin-left: 10vw;
+  margin-right: 10vw;
+  margin-bottom: 10vw;
+  background-color: #363333ce;
+  color: white;
+  padding: 1vw;
+  text-align: center;
+  align-items: center;
+}
+
+#feedback-area textarea {
+  width: 100%;
+  height: 100px;
+  resize: none;
+  border-radius: 1px;
+}
+
+#feedback-area input {
+  background-color: #363333ce;
+  color: white;
+  padding: 1vw;
+  width: 150px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.5vw;
+  cursor: pointer;
+  outline: none;
 }

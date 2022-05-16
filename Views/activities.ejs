@@ -16,7 +16,7 @@
         <div class="top-bar">
             <img id="uea" src="https://i.imgur.com/G8W14Io.png">
             <h1>Student Study Planner</h1>
-            <img id="logo" src="https://i.imgur.com/Bfrya3f.png">
+            <img id="logo" src="https://i.imgur.com/Bfrya3f.png​">
         </div>
 
         </div>
@@ -29,6 +29,7 @@
                     <li><a id="modulesButton">Modules</a></li>
                     <li><a href="about">About</a></li>
                     <li><a href="help">Help</a></li>
+
                     <li>
                         <form action="/logout?_method=DELETE" method="POST">
                             <button class="logoutBtn" type="submit">Log Out</button>
@@ -37,7 +38,7 @@
                     <li>
                         <button id="colorBtn" class="darkMode" onclick="colourFunction()">Toggle Colour</button>
                     </li>
-
+                    <!--Added 3 images FELIX-->
                     <div id="social">
                         <div id="fb">
                             <a href="https://facebook.com/ueaofficial/">
@@ -62,19 +63,26 @@
     </header>
 
     <div class="content-container">
-        <h1>Help </h1>
-        <h2>Need help using the study planner?</h2>
-        <p><a href "xyz create a simple guide document">Follow our simple guide by clicking here!</a></p>
-        <h3>Uploading a file</h3>
-        <p>Step by step process of how to upload a file</p>
-        <h3>Creating a task</h3>
-        <p>Step by step process of how to create a task</p>
-        <h2>Any other issues</h2>
-        <p>
-            Feel free to contact us with any issues at : <a href="support@ueaplanner.co.uk">support@ueaplanner.co.uk</a>
-        </p>
 
-        <img id="help-image" src="https://i.imgur.com/EhzOCKG.png">
+        <form action="/activities" method="POST" id="createActivity">
+            <label for="name">Activity name</label><br>
+            <input type="text" id="activityName" name="activityName"><br><br>
+
+            <label for="name">Module</label><br>
+            <select id="activityParent" name="activityParent">
+                <option selected disabled>Select...</option>
+                <% for(var i=0; i < modules.length; i++) { %>
+                    <option value="<%= modules[i].name %>">
+                        <%= modules[i].name %>
+                    </option>
+                    <% } %>
+            </select><br><br>
+
+            <label for="name">Time (minutes):</label><br>
+            <input type="number" id="activityTime" name="activityTime"><br>
+        </form>
+        <button class="loginBtn" type="submit" form="createActivity">Submit</button>
+
     </div>
 
     <script src="scripts.js"></script>

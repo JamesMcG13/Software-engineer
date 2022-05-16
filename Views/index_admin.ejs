@@ -3,32 +3,31 @@
 <meta charset="UTF-8">
 <title>UEA Study Planner</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="stylesheet" href="planner_style.css">
+<link rel="stylesheet" href="admin_style.css">
 <style>
 </style>
 
-<body>
+<body class="admin">
     <!-- scroll to top button -->
     <button id="scrollBtn" title="Back to top" onclick="topFunction()">↑<br>Back to Top</button>
 
     <header>
         <!-- header contains both nav bar and logo  -->
-        <div class="top-bar">
+        <div class="top-bar-admin">
             <img id="uea" src="https://i.imgur.com/G8W14Io.png">
             <h1>Student Study Planner</h1>
-            <img id="logo" src="https://i.imgur.com/Bfrya3f.png">
+            <img id="logo" src="https://i.imgur.com/Bfrya3f.png​">
         </div>
 
         </div>
 
-        <div class="navigation-bar">
-            <div id="navigation-container">
+        <div class="navigation-bar-admin">
+            <div id="navigation-container-admin">
                 <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="calendar">Calendar</a></li>
-                    <li><a id="modulesButton">Modules</a></li>
-                    <li><a href="about">About</a></li>
-                    <li><a href="help">Help</a></li>
+                    <li><a href="index_admin">Home</a></li>
+                    <li><a href="module_creator_admin">Module Creator</a></li>
+                    <li><a href="module_editor">Change Module (TBD)</a></li>
+
                     <li>
                         <form action="/logout?_method=DELETE" method="POST">
                             <button class="logoutBtn" type="submit">Log Out</button>
@@ -61,20 +60,19 @@
 
     </header>
 
-    <div class="content-container">
-        <h1>Help </h1>
-        <h2>Need help using the study planner?</h2>
-        <p><a href "xyz create a simple guide document">Follow our simple guide by clicking here!</a></p>
-        <h3>Uploading a file</h3>
-        <p>Step by step process of how to upload a file</p>
-        <h3>Creating a task</h3>
-        <p>Step by step process of how to create a task</p>
-        <h2>Any other issues</h2>
-        <p>
-            Feel free to contact us with any issues at : <a href="support@ueaplanner.co.uk">support@ueaplanner.co.uk</a>
-        </p>
+    <div class="content-container-admin">
 
-        <img id="help-image" src="https://i.imgur.com/EhzOCKG.png">
+        <h1><u>Admin Dashboard</u></h1>
+        <h2>Welcome to the Admin Dashboard</h2>
+        <div class=" "></div>
+        <p>This is the admin-only section of the study planner.</p>
+        <p>You can create and edit modules here.</p>
+        <p>Your credentials must be reset as soon as you receive your password, and be kept private at all times.</p>
+        <p>Contact the following email if you have issues with resetting your admin credentials - <a
+                href="adminsupport@ueaplanner.co.uk">adminsupport@ueaplanner.co.uk</a> </p>
+        <p>For urgent enquiries as well as any reports of abuse or misconduct email - <a
+                href="urgent@ueaplanner.co.uk">urgent@ueaplanner.co.uk</a> - or call +447322192491</p>
+
     </div>
 
     <script src="scripts.js"></script>
